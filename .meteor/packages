@@ -1,0 +1,7 @@
+ecmascript
+es5-shim
+meteor-base
+mongo
+standard-minifier-css
+standard-minifier-js
+tracker

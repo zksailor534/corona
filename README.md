@@ -23,8 +23,8 @@ A Meteor application boilerplate that applies the principles of the Mantra archi
 
 ### Future Tasks
 
-[ ] Different mount location for root component
-[ ] Configure tests
+- [ ] Different mount location for root component
+- [ ] Configure tests
 
 ### Feedback
 

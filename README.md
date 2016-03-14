@@ -2,6 +2,14 @@
 
 A Meteor application boilerplate that applies the principles of the Mantra architecture. Please read the [Mantra](https://kadirahq.github.io/mantra) specification if you are unaware of it. Corona uses [React-Router](https://github.com/reactjs/react-router) as its routing solution. [Redux](https://github.com/reactjs/redux) is used as an application-wide state manager, while [React-Router-Redux](https://github.com/reactjs/react-router-redux) is used to synchronise any route changes into application state. Corona also implements [React Helmet](https://github.com/nfl/react-helmet) for managing changes to the document head of different React containers.
 
+### Built With
+
+* Mantra Structure
+* React Router
+* Redux
+* React-Router-Redux
+* React Helmet
+
 ### Using Corona
 
 1. Check that Meteor is installed
@@ -15,8 +23,8 @@ A Meteor application boilerplate that applies the principles of the Mantra archi
 
 ### Future Tasks
 
-[] Different mount location for root component
-[] Configure tests
+[ ] Different mount location for root component
+[ ] Configure tests
 
 ### Feedback
 

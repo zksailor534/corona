@@ -1,16 +1,13 @@
 import React from 'react';
+import { Jumbotron } from 'react-bootstrap';
 
-import Helmet from 'react-helmet';
-import { Link } from 'react-router';
-
-const HomePage = () => (
-  <div className="home-page">
-    <Helmet
-      title="Home"
-    />
-    <div>Welcome Home!</div>
-    <Link to="profile">Profile Page</Link>
-  </div>
+export const HomePage = () => (
+  <Jumbotron className="text-center">
+    <h2>Mantra Base</h2>
+    <p>A starting point for Mantra applications.</p>
+    <p><a className="btn btn-success" href="https://themeteorchef.com/base" role="button">Read the Base Documentation</a></p>
+    <p style={ { fontSize: '16px', color: '#aaa' } }>Currently at v1.0.0</p>
+  </Jumbotron>
 );
 
 export default HomePage;

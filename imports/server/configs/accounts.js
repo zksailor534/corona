@@ -4,10 +4,10 @@ import { Accounts } from 'meteor/accounts-base';
 
 const users = [
   {
-    email: 'admin@admin.com',
+    email: 'admin@mantra.com',
     password: 'password',
     profile: {
-      name: { first: 'Nate', last: 'Greene' },
+      name: { first: 'Mantra', last: 'Admin' },
     },
     roles: [ 'admin' ],
   },

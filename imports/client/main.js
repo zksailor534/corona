@@ -12,12 +12,10 @@ import initContext from './configs/context';
 
 // Modules
 import coreModule from './modules/core';
-import userModule from './modules/user';
 
 // Combine Reducers
 const reducer = combineReducers({
   ...coreModule.reducer,
-  ...userModule.reducer,
   routing: routerReducer,
 });
 
@@ -27,5 +25,4 @@ const context = initContext({ reducer });
 // Create App
 const app = createApp(context);
 app.loadModule(coreModule);
-app.loadModule(userModule);
 app.init();

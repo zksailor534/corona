@@ -11,6 +11,7 @@ import HomePage from './components/homePage';
 import ProfilePage from '../user/components/profilePage';
 import { Login } from './components/login';
 import { NotFound } from './components/not-found';
+import { RecoverPassword } from './components/recover-password';
 import { Signup } from './components/signup';
 
 export default function (injectDeps, { Meteor, Store }) {
@@ -33,6 +34,7 @@ export default function (injectDeps, { Meteor, Store }) {
           <IndexRoute component={HomePage} onEnter={ requireAuth } />
           <Route path="profile" component={ProfilePage} onEnter={ requireAuth } />
           <Route name="login" path="/login" component={ Login } />
+          <Route name="recover-password" path="/recover-password" component={ RecoverPassword } />
           <Route name="signup" path="/signup" component={ Signup } />
           <Route path="*" component={ NotFound } />
         </Route>

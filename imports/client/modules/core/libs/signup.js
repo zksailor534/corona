@@ -3,8 +3,6 @@ import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { getInputValue } from './get-input-value';
 
-let component;
-
 const getUserData = () => ({
   email: getInputValue(component.refs.emailAddress),
   password: getInputValue(component.refs.password),
@@ -30,6 +28,5 @@ const signUp = () => {
 };
 
 export const handleSignup = (options) => {
-  component = options.component;
-  signUp(component);
+  signUp(options.component);
 };

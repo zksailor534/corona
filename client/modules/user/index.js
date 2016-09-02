@@ -1,5 +1,5 @@
 import actions from './actions';
-import reducer from './configs/reducer.js';
+import reducer from './configs/reducer';
 
 export default {
   actions,

@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {Provider} from 'react-redux';
-import {Router, Route, IndexRoute, browserHistory} from 'react-router';
-import {syncHistoryWithStore} from 'react-router-redux';
+import { Provider } from 'react-redux';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 
 // Components
-import Layout from './components/layout.jsx';
-import HomePage from './components/homePage.jsx';
-import ProfilePage from '../user/components/profilePage.jsx';
+import Layout from './components/layout';
+import HomePage from './components/homePage';
+import ProfilePage from '../user/components/profilePage';
 
 export default function (inject, {Store}) {
   const history = syncHistoryWithStore(browserHistory, Store);

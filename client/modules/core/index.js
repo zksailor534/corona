@@ -1,6 +1,6 @@
 import actions from './actions';
-import reducer from './configs/reducer.js';
-import routes from './routes.jsx';
+import reducer from './configs/reducer';
+import routes from './routes';
 
 export default {
   actions,

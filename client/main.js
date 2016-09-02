@@ -1,9 +1,9 @@
-import {createApp} from 'mantra-core';
+import { createApp } from 'mantra-core';
 import initContext from './configs/context';
 
 // Redux
-import {combineReducers} from 'redux';
-import {routerReducer} from 'react-router-redux';
+import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
 // Modules
 import coreModule from './modules/core';

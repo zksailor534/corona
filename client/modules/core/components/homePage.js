@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Helmet from 'react-helmet';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 
 const HomePage = () => (
   <div className="home-page">

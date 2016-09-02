@@ -1,10 +1,10 @@
-import {Meteor} from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 import {Tracker} from 'meteor/tracker';
 
 // Redux
-import {createStore} from 'redux';
+import { createStore } from 'redux';
 
-export default function ({reducer}) {
+export default function ({ reducer }) {
   return {
     Meteor,
     Tracker,

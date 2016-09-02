@@ -9,6 +9,9 @@ import { routerReducer } from 'react-router-redux';
 import coreModule from './modules/core';
 import userModule from './modules/user';
 
+// Import styles
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 // Combine Reducers
 const reducer = combineReducers({
   ...coreModule.reducer,

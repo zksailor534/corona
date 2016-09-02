@@ -10,6 +10,7 @@
     "babel-root-slash-import": "1.x.x"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "mantra-core": "^1.7.0",
     "meteor-node-stubs": "^0.2.3",
     "react": "^15.3.1",

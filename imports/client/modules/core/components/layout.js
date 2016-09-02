@@ -2,18 +2,20 @@ import React from 'react';
 import { Grid } from 'react-bootstrap';
 import Helmet from 'react-helmet';
 
-import Navigation from './navigation';
+import Navigation from '../containers/navigation';
 
-const Layout = (props) => (
-  <div className="app">
-    <Helmet
-      titleTemplate="Mantra - %s"
-    />
-  <Navigation />
-    <Grid>
-      {props.children}
-    </Grid>
-  </div>
-);
+const Layout = ({children}) => {
+  return (
+    <div className="app">
+      <Helmet
+        titleTemplate="Mantra - %s"
+      />
+    <Navigation />
+      <Grid>
+        {children}
+      </Grid>
+    </div>
+  );
+}
 
 export default Layout;

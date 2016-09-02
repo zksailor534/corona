@@ -9,8 +9,17 @@ mobile-experience             # Packages for a great mobile UX
 mongo                         # The database Meteor supports right now
 reactive-var                  # Reactive variable for tracker
 tracker                       # Meteor's client-side reactive programming library
+static-html                   # Define static page content in .html files
 
 standard-minifier-css         # CSS minifier run for production mode
 standard-minifier-js          # JS minifier run for production mode
 es5-shim                      # ECMAScript 5 compatibility for older browsers.
 ecmascript                    # Enable ECMAScript2015+ syntax in app code
+
+accounts-password             # Password support for accounts
+accounts-base                 # A user account system
+fourseven:scss                # Style with attitude. Sass and SCSS support for Meteor.js
+alanning:roles                # Authorization package for Meteor
+aldeed:collection2            # Automatic validation of insert and update operations
+
+themeteorchef:bert            # A client side, multi-style alerts system for Meteor.

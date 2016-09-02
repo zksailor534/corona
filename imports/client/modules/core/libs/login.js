@@ -1,7 +1,7 @@
 import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
-import { getInputValue } from './get-input-value';
+import getInputValue from './get-input-value';
 
 const login = (component) => {
   const email = getInputValue(component.refs.emailAddress);
@@ -23,6 +23,8 @@ const login = (component) => {
   });
 };
 
-export const handleLogin = (options) => {
+const handleLogin = (options) => {
   login(options.component);
 };
+
+export default handleLogin;

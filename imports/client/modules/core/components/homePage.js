@@ -1,7 +1,7 @@
 import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
 
-export const HomePage = () => (
+const HomePage = () => (
   <Jumbotron className="text-center">
     <h2>Mantra Base</h2>
     <p>A starting point for Mantra applications.</p>

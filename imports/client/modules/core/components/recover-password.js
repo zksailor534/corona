@@ -1,8 +1,8 @@
 import React from 'react';
 import { Row, Col, Alert, FormGroup, FormControl, Button } from 'react-bootstrap';
-import { handleRecoverPassword } from '../libs/recover-password';
+import handleRecoverPassword from '../libs/recover-password';
 
-export class RecoverPassword extends React.Component {
+class RecoverPassword extends React.Component {
   // componentDidMount() {
   //   handleRecoverPassword({ component: this });
   // }
@@ -20,7 +20,11 @@ export class RecoverPassword extends React.Component {
           <Alert bsStyle="info">
             Enter your email address below to receive a link to reset your password.
           </Alert>
-          <form ref="recoverPassword" className="recover-password" onSubmit={ this.handleSubmit.bind(this) }>
+          <form
+            ref="recoverPassword"
+            className="recover-password"
+            onSubmit={ this.handleSubmit.bind(this) }
+          >
             <FormGroup>
               <FormControl
                 type="email"
@@ -36,3 +40,5 @@ export class RecoverPassword extends React.Component {
     );
   }
 }
+
+export default RecoverPassword;

@@ -1,9 +1,9 @@
 import { browserHistory } from 'react-router';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
-import { getInputValue } from './get-input-value';
+import getInputValue from './get-input-value';
 
-const getUserData = () => ({
+const getUserData = (component) => ({
   email: getInputValue(component.refs.emailAddress),
   password: getInputValue(component.refs.password),
   profile: {
@@ -14,8 +14,8 @@ const getUserData = () => ({
   },
 });
 
-const signUp = () => {
-  const user = getUserData();
+const signUp = (component) => {
+  const user = getUserData(component);
 
   Accounts.createUser(user, (error) => {
     if (error) {
@@ -27,6 +27,8 @@ const signUp = () => {
   });
 };
 
-export const handleSignup = (options) => {
+const handleSignup = (options) => {
   signUp(options.component);
 };
+
+export default handleSignup;

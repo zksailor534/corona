@@ -3,5 +3,5 @@ import reducer from './configs/reducer';
 
 export default {
   actions,
-  reducer
+  reducer,
 };

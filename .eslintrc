@@ -1,0 +1,48 @@
+{
+  "extends": [
+    "airbnb/base",
+    "plugin:meteor/guide",
+    "plugin:react/recommended"
+  ],
+
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+
+  "plugins": [
+    "meteor",
+    "react"
+  ],
+
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+
+  "globals": {
+    "server": false,
+    "browser": false,
+    "expect": false
+  },
+
+  "rules": {
+    "import/no-unresolved": 0,
+    "import/no-extraneous-dependencies": "off",
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allow": [
+          "_id",
+          "_ensureIndex",
+          "_verifyEmailToken",
+          "_resetPasswordToken",
+          "_name"
+        ]
+      }
+    ]
+  }
+}

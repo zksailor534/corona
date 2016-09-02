@@ -9,11 +9,11 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import Layout from './components/layout';
 import HomePage from './components/homePage';
 import ProfilePage from '../user/components/profilePage';
-import { Login } from './components/login';
-import { NotFound } from './components/not-found';
-import { RecoverPassword } from './components/recover-password';
-import { ResetPassword } from './components/reset-password';
-import { Signup } from './components/signup';
+import Login from './components/login';
+import NotFound from './components/not-found';
+import RecoverPassword from './components/recover-password';
+import ResetPassword from './components/reset-password';
+import Signup from './components/signup';
 
 export default function (injectDeps, { Meteor, Store }) {
   const history = syncHistoryWithStore(browserHistory, Store);
@@ -44,4 +44,4 @@ export default function (injectDeps, { Meteor, Store }) {
     </Provider>,
     document.getElementById('react-root')
   );
-};
+}

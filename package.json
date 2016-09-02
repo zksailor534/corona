@@ -1,13 +1,37 @@
 {
-  "name": "corona",
-  "version": "0.0.1",
+  "name": "mantra-base",
+  "version": "0.1.0",
+  "description": "Application description.",
+  "scripts": {
+    "start": "meteor --settings settings-development.json",
+    "test": "meteor test --driver-package practicalmeteor:mocha --port 5000",
+    "lintfix": "eslint . --fix --ext .js --ignore-path .gitignore",
+    "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests",
+    "chimp-test": "chimp --ddp=http://localhost:3000 --mocha --path=tests",
+    "staging": "meteor deploy staging.meteor.com --settings settings-development.json",
+    "production": "meteor deploy production.meteor.com --settings settings-production.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zksailor534/mantra-base.git"
+  },
+  "author": "Nate Greene",
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "6.x.x",
     "babel-polyfill": "6.x.x",
     "babel-preset-es2015": "6.x.x",
     "babel-preset-react": "6.x.x",
     "babel-preset-stage-2": "6.x.x",
-    "babel-root-slash-import": "1.x.x"
+    "babel-root-slash-import": "1.x.x",
+    "chimp": "^0.40.4",
+    "eslint": "^3.4.0",
+    "eslint-config-airbnb": "^10.0.1",
+    "eslint-plugin-import": "^1.14.0",
+    "eslint-plugin-jsx-a11y": "^2.2.1",
+    "eslint-plugin-meteor": "^4.0.0",
+    "eslint-plugin-react": "^6.2.0",
+    "faker": "^3.1.0"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",

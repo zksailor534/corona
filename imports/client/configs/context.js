@@ -11,6 +11,6 @@ export default function ({ reducer }) {
     Store: createStore(
       reducer,
       window.devToolsExtension && window.devToolsExtension()
-    )
+    ),
   };
-};
+}

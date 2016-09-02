@@ -1,6 +1,6 @@
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
-import { getInputValue } from './get-input-value';
+import getInputValue from './get-input-value';
 
 const handleRecovery = (component) => {
   Accounts.forgotPassword({
@@ -14,6 +14,8 @@ const handleRecovery = (component) => {
   });
 };
 
-export const handleRecoverPassword = (options) => {
+const handleRecoverPassword = (options) => {
   handleRecovery(options.component);
 };
+
+export default handleRecoverPassword;

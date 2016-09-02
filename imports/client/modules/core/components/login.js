@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import { handleLogin } from '../libs/login';
+import handleLogin from '../libs/login';
 
-export class Login extends React.Component {
+class Login extends React.Component {
   // componentDidMount() {
   //   handleLogin({ component: this });
   // }
@@ -45,3 +45,5 @@ export class Login extends React.Component {
     );
   }
 }
+
+export default Login;

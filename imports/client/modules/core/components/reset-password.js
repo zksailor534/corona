@@ -1,8 +1,8 @@
 import React from 'react';
 import { Row, Col, Alert, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import { handleResetPassword } from '../libs/reset-password';
+import handleResetPassword from '../libs/reset-password';
 
-export class ResetPassword extends React.Component {
+class ResetPassword extends React.Component {
   // componentDidMount() {
   //   handleResetPassword({
   //     component: this,
@@ -27,7 +27,11 @@ export class ResetPassword extends React.Component {
             To reset your password, enter a new one below. You will be logged in
   with your new password.
           </Alert>
-          <form ref="resetPassword" className="reset-password" onSubmit={ this.handleSubmit.bind(this) }>
+          <form
+            ref="resetPassword"
+            className="reset-password"
+            onSubmit={ this.handleSubmit.bind(this) }
+          >
             <FormGroup>
               <ControlLabel>New Password</ControlLabel>
               <FormControl
@@ -57,3 +61,5 @@ export class ResetPassword extends React.Component {
 ResetPassword.propTypes = {
   params: React.PropTypes.object,
 };
+
+export default ResetPassword;

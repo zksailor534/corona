@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import { handleSignup } from '../libs/signup';
+import handleSignup from '../libs/signup';
 
-export class Signup extends React.Component {
+class Signup extends React.Component {
   // componentDidMount() {
   //   handleSignup({ component: this });
   // }
@@ -69,3 +69,5 @@ export class Signup extends React.Component {
     );
   }
 }
+
+export default Signup;

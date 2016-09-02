@@ -9,7 +9,7 @@ const users = [
     profile: {
       name: { first: 'Mantra', last: 'Admin' },
     },
-    roles: [ 'admin' ],
+    roles: ['admin'],
   },
 ];
 

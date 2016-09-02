@@ -1,7 +1,7 @@
 import { browserHistory } from 'react-router';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
-import { getInputValue } from './get-input-value';
+import getInputValue from './get-input-value';
 
 const handleReset = (component, token) => {
   const password = getInputValue(component.refs.newPassword);
@@ -15,6 +15,8 @@ const handleReset = (component, token) => {
   });
 };
 
-export const handleResetPassword = (options) => {
+const handleResetPassword = (options) => {
   handleReset(options.component, options.token);
 };
+
+export default handleResetPassword;

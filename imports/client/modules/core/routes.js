@@ -10,6 +10,7 @@ import Layout from './components/layout';
 import HomePage from './components/homePage';
 import ProfilePage from '../user/components/profilePage';
 import { Login } from './components/login';
+import { NotFound } from './components/not-found';
 
 export default function (injectDeps, { Meteor, Store }) {
   const history = syncHistoryWithStore(browserHistory, Store);
@@ -31,6 +32,7 @@ export default function (injectDeps, { Meteor, Store }) {
           <IndexRoute component={HomePage} onEnter={ requireAuth } />
           <Route path="profile" component={ProfilePage} onEnter={ requireAuth } />
           <Route name="login" path="/login" component={ Login } />
+          <Route path="*" component={ NotFound } />
         </Route>
       </Router>
     </Provider>,

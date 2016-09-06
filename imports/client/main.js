@@ -12,10 +12,12 @@ import initContext from './configs/context';
 
 // Modules
 import coreModule from './modules/core';
+import documentsModule from './modules/documents';
 
 // Combine Reducers
 const reducer = combineReducers({
   ...coreModule.reducer,
+  ...documentsModule.reducer,
   routing: routerReducer,
 });
 
@@ -25,4 +27,5 @@ const context = initContext({ reducer });
 // Create App
 const app = createApp(context);
 app.loadModule(coreModule);
+app.loadModule(documentsModule);
 app.init();

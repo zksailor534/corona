@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-// Components
+// Core Components
 import Layout from './components/layout';
 import HomePage from './components/homePage';
 import Login from './components/login';
@@ -13,6 +13,9 @@ import NotFound from './components/not-found';
 import RecoverPassword from './components/recover-password';
 import ResetPassword from './components/reset-password';
 import Signup from './components/signup';
+
+// Documents Components
+import Documents from '../documents/components/documents';
 
 export default function (injectDeps, { Meteor, Store }) {
   const history = syncHistoryWithStore(browserHistory, Store);
@@ -32,6 +35,12 @@ export default function (injectDeps, { Meteor, Store }) {
       <Router history={history}>
         <Route path="/" component={LayoutCtx}>
           <IndexRoute component={HomePage} onEnter={ requireAuth } />
+          <Route
+            name="documents"
+            path="/documents"
+            component={ Documents }
+            onEnter={ requireAuth }
+          />
           <Route name="login" path="/login" component={ Login } />
           <Route name="recover-password" path="/recover-password" component={ RecoverPassword } />
           <Route name="reset-password" path="/reset-password/:token" component={ ResetPassword } />

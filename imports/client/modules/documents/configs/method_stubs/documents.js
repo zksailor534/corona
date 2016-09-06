@@ -1,11 +1,9 @@
+/* eslint no-unused-vars: 0 */
+
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
-import { Documents } from '/lib/collections';
-
-import { rateLimit } from '../libs/rate-limit.js';
-
-export default function () {
+export default function ({ Collections }) {
   const insertDocument = new ValidatedMethod({
     name: 'documents.insert',
     validate: new SimpleSchema({
@@ -13,7 +11,7 @@ export default function () {
       title: { type: String },
     }).validator(),
     run(document) {
-      Documents.insert(document);
+      Collections.Documents.insert(document);
     },
   });
 
@@ -24,7 +22,7 @@ export default function () {
       'update.title': { type: String, optional: true },
     }).validator(),
     run({ _id, update }) {
-      Documents.update(_id, { $set: update });
+      Collections.Documents.update(_id, { $set: update });
     },
   });
 
@@ -34,17 +32,7 @@ export default function () {
       _id: { type: String },
     }).validator(),
     run({ _id }) {
-      Documents.remove(_id);
+      Collections.Documents.remove(_id);
     },
-  });
-
-  rateLimit({
-    methods: [
-      insertDocument,
-      updateDocument,
-      removeDocument,
-    ],
-    limit: 5,
-    timeRange: 1000,
   });
 }

@@ -9,7 +9,7 @@ const Layout = ({ children }) => (
     <Helmet
       titleTemplate="Mantra - %s"
     />
-  <Navigation />
+    <Navigation />
     <Grid>
       {children}
     </Grid>

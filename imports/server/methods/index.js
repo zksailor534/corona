@@ -1,5 +1,5 @@
-// import items from './items';
+import documents from './documents';
 
 export default function () {
-  // items();
+  documents();
 }

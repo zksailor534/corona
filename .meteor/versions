@@ -19,6 +19,7 @@ caching-compiler@1.1.7
 caching-html-compiler@1.0.6
 callback-hook@1.0.9
 check@1.2.3
+dburles:factory@1.1.0
 ddp@1.2.5
 ddp-client@1.2.9
 ddp-common@1.2.6
@@ -45,6 +46,7 @@ launch-screen@1.0.12
 livedata@1.0.18
 localstorage@1.0.11
 logging@1.1.15
+mdg:validated-method@1.1.0
 mdg:validation-error@0.2.0
 meteor@1.2.17
 meteor-base@1.0.4

@@ -1,9 +1,9 @@
 import actions from './actions';
-import reducer from './configs/reducer';
+import reducers from './reducers';
 import routes from './routes';
 
 export default {
   actions,
-  reducer,
+  reducers,
   routes,
 };

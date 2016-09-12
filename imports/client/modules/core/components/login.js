@@ -1,16 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import handleLogin from '../libs/login';
+// import validate from 'validate.js';
 
 class Login extends React.Component {
-  // componentDidMount() {
-  //   handleLogin({ component: this });
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
 
   handleSubmit(event) {
     event.preventDefault();
-    handleLogin({ component: this });
+    this.props.submitLogin({
+      email: this.state.email,
+      password: this.state.password,
+      component: this,
+    });
+  }
+
+  setEmail(event) {
+    event.preventDefault();
+    this.setState({
+      email: event.target.value,
+    });
+  }
+
+  setPassword(event) {
+    event.preventDefault();
+    this.setState({
+      password: event.target.value,
+    });
   }
 
   render() {
@@ -26,6 +48,8 @@ class Login extends React.Component {
                 ref="emailAddress"
                 name="emailAddress"
                 placeholder="Email Address"
+                value={this.state.email}
+                onChange={this.setEmail.bind(this)}
               />
             </FormGroup>
             <FormGroup>
@@ -35,6 +59,8 @@ class Login extends React.Component {
                 ref="password"
                 name="password"
                 placeholder="Password"
+                value={this.state.password}
+                onChange={this.setPassword.bind(this)}
               />
               <Link className="pull-right" to="/recover-password">Forgot Password?</Link>
             </FormGroup>
@@ -45,5 +71,9 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  submitLogin: React.PropTypes.func.isRequired,
+};
 
 export default Login;

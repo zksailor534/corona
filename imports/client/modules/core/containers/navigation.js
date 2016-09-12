@@ -1,19 +1,13 @@
-import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
+import { useDeps } from 'mantra-core';
+import { withRedux, composeAll } from 'react-komposer-plus';
 
 import Navigation from '../components/navigation';
 
-export const composer = ({ context }, onData) => {
-  const { Meteor } = context();
-
-  onData(null, { hasUser: Meteor.user() });
-};
-
-// export const depsMapper = (context, actions) => ({
-export const depsMapper = (context) => ({
-  context: () => context,
+const mapStateToProps = ({ login }) => ({
+  loggedIn: login.isAuthenticated,
 });
 
 export default composeAll(
-  composeWithTracker(composer),
-  useDeps(depsMapper)
+  withRedux(mapStateToProps),
+  useDeps()
 )(Navigation);

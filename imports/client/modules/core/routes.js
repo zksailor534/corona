@@ -8,7 +8,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 // Core Components
 import Layout from './components/layout';
 import HomePage from './components/homePage';
-import Login from './components/login';
+import Login from './containers/login';
 import NotFound from './components/not-found';
 import RecoverPassword from './components/recover-password';
 import ResetPassword from './components/reset-password';

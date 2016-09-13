@@ -14,14 +14,12 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: true,
-        errorMessage: '',
         user: action.user,
       });
     case 'LOGIN_FAILURE':
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: false,
-        errorMessage: action.message,
         user: null,
       });
     case 'LOGOUT_REQUEST':
@@ -43,14 +41,29 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: true,
-        errorMessage: '',
         user: action.user,
       });
     case 'SIGNUP_FAILURE':
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: false,
-        errorMessage: action.message,
+        user: null,
+      });
+    case 'RESET_PASSWORD_REQUEST':
+      return Object.assign({}, state, {
+        isFetching: true,
+        isAuthenticated: false,
+      });
+    case 'RESET_PASSWORD_SUCCESS':
+      return Object.assign({}, state, {
+        isFetching: false,
+        isAuthenticated: true,
+        user: action.user,
+      });
+    case 'RESET_PASSWORD_FAILURE':
+      return Object.assign({}, state, {
+        isFetching: false,
+        isAuthenticated: false,
         user: null,
       });
     default:

@@ -10,9 +10,8 @@ const receiveLogin = (user) => ({
   user,
 });
 
-const loginError = (message) => ({
+const loginError = () => ({
   type: 'LOGIN_FAILURE',
-  message,
 });
 
 const requestLogout = () => ({
@@ -32,9 +31,21 @@ const receiveSignup = (user) => ({
   user,
 });
 
-const signupError = (message) => ({
+const signupError = () => ({
   type: 'SIGNUP_FAILURE',
-  message,
+});
+
+const requestResetPassword = () => ({
+  type: 'RESET_PASSWORD_REQUEST',
+});
+
+const receiveResetPassword = (user) => ({
+  type: 'RESET_PASSWORD_SUCCESS',
+  user,
+});
+
+const resetPasswordError = () => ({
+  type: 'RESET_PASSWORD_FAILURE',
 });
 
 export default {
@@ -49,7 +60,7 @@ export default {
       if (error) {
         Bert.alert(error.reason, 'warning');
         // Change state to login error
-        dispatch(loginError(error.reason));
+        dispatch(loginError());
       } else {
         Bert.alert('Logged in!', 'success');
         // Change state to successful login
@@ -101,7 +112,7 @@ export default {
       if (error) {
         Bert.alert(error.reason, 'danger');
         // Change state to signup error
-        dispatch(signupError(error.reason));
+        dispatch(signupError());
       } else {
         Bert.alert('Welcome!', 'success');
         // Change state to successful login
@@ -121,6 +132,28 @@ export default {
         Bert.alert(error.reason, 'warning');
       } else {
         Bert.alert('Check your inbox for a reset link!', 'success');
+      }
+    });
+  },
+  resetPassword({ Meteor, Store, Bert }, { token, password }) {
+    const { dispatch } = Store;
+
+    // Change state to password reset request
+    dispatch(requestResetPassword());
+
+    // Call reset password procedure
+    Accounts.resetPassword(token, password, (error) => {
+      if (error) {
+        Bert.alert(error.reason, 'danger');
+        // Change state to password reset error
+        dispatch(resetPasswordError());
+      } else {
+        Bert.alert('Password reset!', 'success');
+        // Change state to successful password reset
+        dispatch(receiveResetPassword(Meteor.user()));
+
+        // Redirect to home screen
+        browserHistory.push('/');
       }
     });
   },

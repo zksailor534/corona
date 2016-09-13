@@ -1,21 +1,31 @@
 import React from 'react';
 import { Row, Col, Alert, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import handleResetPassword from '../libs/reset-password';
+// import validate from 'validate.js';
 
 class ResetPassword extends React.Component {
-  // componentDidMount() {
-  //   handleResetPassword({
-  //     component: this,
-  //     token: this.props.params.token,
-  //   });
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      password: '',
+      repeatPassword: '',
+    };
+  }
 
   handleSubmit(event) {
     event.preventDefault();
-    handleResetPassword({
-      component: this,
-      token: this.props.params.token,
-    });
+    if (this.state.password === this.state.repeatPassword) {
+      this.props.resetPassword({
+        token: this.props.params.token,
+        password: this.state.password,
+      });
+    }
+  }
+
+  setValue(event) {
+    event.preventDefault();
+    const newState = {};
+    newState[event.target.name] = event.target.value;
+    this.setState(newState);
   }
 
   render() {
@@ -36,18 +46,20 @@ class ResetPassword extends React.Component {
               <ControlLabel>New Password</ControlLabel>
               <FormControl
                 type="password"
-                ref="newPassword"
-                name="newPassword"
+                name="password"
                 placeholder="New Password"
+                value={this.state.password}
+                onChange={this.setValue.bind(this)}
               />
             </FormGroup>
             <FormGroup>
               <ControlLabel>Repeat New Password</ControlLabel>
               <FormControl
                 type="password"
-                ref="repeatNewPassword"
-                name="repeatNewPassword"
+                name="repeatPassword"
                 placeholder="Repeat New Password"
+                value={this.state.repeatPassword}
+                onChange={this.setValue.bind(this)}
               />
             </FormGroup>
             <Button type="submit" bsStyle="success">Reset Password &amp; Login</Button>
@@ -60,6 +72,7 @@ class ResetPassword extends React.Component {
 
 ResetPassword.propTypes = {
   params: React.PropTypes.object,
+  resetPassword: React.PropTypes.func.isRequired,
 };
 
 export default ResetPassword;

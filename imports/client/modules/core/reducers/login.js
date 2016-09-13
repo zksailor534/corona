@@ -15,14 +15,24 @@ export default (state = initialState, action) => {
         isFetching: false,
         isAuthenticated: true,
         errorMessage: '',
-        userId: action.userId,
+        user: action.user,
       });
     case 'LOGIN_FAILURE':
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: false,
         errorMessage: action.message,
-        userId: '',
+        user: null,
+      });
+    case 'LOGOUT_REQUEST':
+      return Object.assign({}, state, {
+        isFetching: true,
+        isAuthenticated: true,
+      });
+    case 'LOGOUT_SUCCESS':
+      return Object.assign({}, state, {
+        isFetching: false,
+        isAuthenticated: false,
       });
     default:
       return state;

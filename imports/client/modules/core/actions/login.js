@@ -7,12 +7,20 @@ const requestLogin = () => ({
 
 const receiveLogin = (user) => ({
   type: 'LOGIN_SUCCESS',
-  userId: user,
+  user,
 });
 
 const loginError = (message) => ({
   type: 'LOGIN_FAILURE',
   message,
+});
+
+const requestLogout = () => ({
+  type: 'LOGOUT_REQUEST',
+});
+
+const receiveLogout = () => ({
+  type: 'LOGOUT_SUCCESS',
 });
 
 export default {
@@ -31,7 +39,7 @@ export default {
       } else {
         Bert.alert('Logged in!', 'success');
         // Change state to successful login
-        dispatch(receiveLogin(Meteor.userId()));
+        dispatch(receiveLogin(Meteor.user()));
 
         const { location } = component.props;
         if (location.state && location.state.nextPathname) {
@@ -39,6 +47,26 @@ export default {
         } else {
           browserHistory.push('/');
         }
+      }
+    });
+  },
+  submitLogout({ Meteor, Store }) {
+    const { dispatch } = Store;
+
+    // Change state to logout request
+    dispatch(requestLogout());
+
+    // Call logout procedure
+    Meteor.logout((error) => {
+      if (error) {
+        Bert.alert(error.reason, 'warning');
+      } else {
+        Bert.alert('Logged out!', 'success');
+        // Change state to successful logout
+        dispatch(receiveLogout());
+
+        // Redirect to login screen
+        browserHistory.push('/login');
       }
     });
   },

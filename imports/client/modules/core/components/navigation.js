@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Link } from 'react-router';
 import PublicNavigation from './public-navigation';
-import AuthenticatedNavigation from './authenticated-navigation';
+import AuthenticatedNavigation from '../containers/authenticated-navigation';
 
 class Navigation extends React.Component {
   renderNavigation(loggedIn) {

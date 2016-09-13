@@ -1,4 +1,3 @@
-import { Bert } from 'meteor/themeteorchef:bert';
 import { Accounts } from 'meteor/accounts-base';
 import { browserHistory } from 'react-router';
 
@@ -39,7 +38,7 @@ const signupError = (message) => ({
 });
 
 export default {
-  submitLogin({ Meteor, Store }, { email, password, component }) {
+  submitLogin({ Meteor, Store, Bert }, { email, password, component }) {
     const { dispatch } = Store;
 
     // Change state to login request
@@ -65,7 +64,7 @@ export default {
       }
     });
   },
-  submitLogout({ Meteor, Store }) {
+  submitLogout({ Meteor, Store, Bert }) {
     const { dispatch } = Store;
 
     // Change state to logout request
@@ -85,7 +84,7 @@ export default {
       }
     });
   },
-  submitSignup({ Meteor, Store }, { email, password, profile }) {
+  submitSignup({ Meteor, Store, Bert }, { email, password, profile }) {
     const { dispatch } = Store;
 
     // Change state to signup request
@@ -97,7 +96,7 @@ export default {
       profile,
     };
 
-    // Call login procedure
+    // Call signup procedure
     Accounts.createUser(user, (error) => {
       if (error) {
         Bert.alert(error.reason, 'danger');
@@ -110,6 +109,18 @@ export default {
 
         // Redirect to home screen
         browserHistory.push('/');
+      }
+    });
+  },
+  recoverPassword({ Bert }, { email }) {
+    // Call forgot password procedure
+    Accounts.forgotPassword({
+      email,
+    }, (error) => {
+      if (error) {
+        Bert.alert(error.reason, 'warning');
+      } else {
+        Bert.alert('Check your inbox for a reset link!', 'success');
       }
     });
   },

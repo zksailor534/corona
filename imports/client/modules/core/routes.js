@@ -10,7 +10,7 @@ import Layout from './components/layout';
 import HomePage from './components/homePage';
 import Login from './containers/login';
 import NotFound from './components/not-found';
-import RecoverPassword from './components/recover-password';
+import RecoverPassword from './containers/recover-password';
 import ResetPassword from './components/reset-password';
 import Signup from './containers/signup';
 

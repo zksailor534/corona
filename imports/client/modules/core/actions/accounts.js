@@ -1,4 +1,5 @@
 import { Bert } from 'meteor/themeteorchef:bert';
+import { Accounts } from 'meteor/accounts-base';
 import { browserHistory } from 'react-router';
 
 const requestLogin = () => ({
@@ -21,6 +22,20 @@ const requestLogout = () => ({
 
 const receiveLogout = () => ({
   type: 'LOGOUT_SUCCESS',
+});
+
+const requestSignup = () => ({
+  type: 'SIGNUP_REQUEST',
+});
+
+const receiveSignup = (user) => ({
+  type: 'SIGNUP_SUCCESS',
+  user,
+});
+
+const signupError = (message) => ({
+  type: 'SIGNUP_FAILURE',
+  message,
 });
 
 export default {
@@ -67,6 +82,34 @@ export default {
 
         // Redirect to login screen
         browserHistory.push('/login');
+      }
+    });
+  },
+  submitSignup({ Meteor, Store }, { email, password, profile }) {
+    const { dispatch } = Store;
+
+    // Change state to signup request
+    dispatch(requestSignup());
+
+    const user = {
+      email,
+      password,
+      profile,
+    };
+
+    // Call login procedure
+    Accounts.createUser(user, (error) => {
+      if (error) {
+        Bert.alert(error.reason, 'danger');
+        // Change state to signup error
+        dispatch(signupError(error.reason));
+      } else {
+        Bert.alert('Welcome!', 'success');
+        // Change state to successful login
+        dispatch(receiveSignup(Meteor.user()));
+
+        // Redirect to home screen
+        browserHistory.push('/');
       }
     });
   },

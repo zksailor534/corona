@@ -3,12 +3,12 @@ import { withRedux, composeAll } from 'react-komposer-plus';
 
 import AuthenticatedNavigation from '../components/authenticated-navigation';
 
-const mapStateToProps = ({ login }) => ({
-  user: login.user,
+const mapStateToProps = ({ accounts }) => ({
+  user: accounts.user,
 });
 
 export const depsMapper = (context, actions) => ({
-  submitLogout: actions.login.submitLogout,
+  submitLogout: actions.accounts.submitLogout,
   context: () => context,
 });
 

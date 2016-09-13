@@ -11,11 +11,12 @@ export default function ({ reducers }) {
   Meteor.logout();
 
   const initialState = {
-    login: {
+    accounts: {
       isFetching: false,
       isAuthenticated: false,
-    }
-  }
+    },
+  };
+
   const Store = createStore(reducers,
     initialState,
     compose(

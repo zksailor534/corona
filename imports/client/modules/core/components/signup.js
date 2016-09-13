@@ -1,16 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import handleSignup from '../libs/signup';
+// import validate from 'validate.js';
 
 class Signup extends React.Component {
-  // componentDidMount() {
-  //   handleSignup({ component: this });
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+    };
+  }
 
   handleSubmit(event) {
     event.preventDefault();
-    handleSignup({ component: this });
+    this.props.submitSignup({
+      email: this.state.email,
+      password: this.state.password,
+      profile: {
+        name: {
+          first: this.state.firstName,
+          last: this.state.lastName,
+        },
+      },
+    });
+  }
+
+  setValue(event) {
+    event.preventDefault();
+    const newState = {};
+    newState[event.target.name] = event.target.value;
+    this.setState(newState);
   }
 
   render() {
@@ -25,9 +47,10 @@ class Signup extends React.Component {
                   <ControlLabel>First Name</ControlLabel>
                   <FormControl
                     type="text"
-                    ref="firstName"
                     name="firstName"
                     placeholder="First Name"
+                    value={this.state.firstName}
+                    onChange={this.setValue.bind(this)}
                   />
                 </FormGroup>
               </Col>
@@ -36,9 +59,10 @@ class Signup extends React.Component {
                   <ControlLabel>Last Name</ControlLabel>
                   <FormControl
                     type="text"
-                    ref="lastName"
                     name="lastName"
                     placeholder="Last Name"
+                    value={this.state.lastName}
+                    onChange={this.setValue.bind(this)}
                   />
                 </FormGroup>
               </Col>
@@ -47,18 +71,20 @@ class Signup extends React.Component {
               <ControlLabel>Email Address</ControlLabel>
               <FormControl
                 type="text"
-                ref="emailAddress"
-                name="emailAddress"
+                name="email"
                 placeholder="Email Address"
+                value={this.state.email}
+                onChange={this.setValue.bind(this)}
               />
             </FormGroup>
             <FormGroup>
               <ControlLabel>Password</ControlLabel>
               <FormControl
                 type="password"
-                ref="password"
                 name="password"
                 placeholder="Password"
+                value={this.state.password}
+                onChange={this.setValue.bind(this)}
               />
             </FormGroup>
             <Button type="submit" bsStyle="success">Sign Up</Button>
@@ -69,5 +95,9 @@ class Signup extends React.Component {
     );
   }
 }
+
+Signup.propTypes = {
+  submitSignup: React.PropTypes.func.isRequired,
+};
 
 export default Signup;

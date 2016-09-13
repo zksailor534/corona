@@ -34,6 +34,25 @@ export default (state = initialState, action) => {
         isFetching: false,
         isAuthenticated: false,
       });
+    case 'SIGNUP_REQUEST':
+      return Object.assign({}, state, {
+        isFetching: true,
+        isAuthenticated: false,
+      });
+    case 'SIGNUP_SUCCESS':
+      return Object.assign({}, state, {
+        isFetching: false,
+        isAuthenticated: true,
+        errorMessage: '',
+        user: action.user,
+      });
+    case 'SIGNUP_FAILURE':
+      return Object.assign({}, state, {
+        isFetching: false,
+        isAuthenticated: false,
+        errorMessage: action.message,
+        user: null,
+      });
     default:
       return state;
   }

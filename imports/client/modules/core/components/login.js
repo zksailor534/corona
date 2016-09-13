@@ -21,18 +21,11 @@ class Login extends React.Component {
     });
   }
 
-  setEmail(event) {
+  setValue(event) {
     event.preventDefault();
-    this.setState({
-      email: event.target.value,
-    });
-  }
-
-  setPassword(event) {
-    event.preventDefault();
-    this.setState({
-      password: event.target.value,
-    });
+    const newState = {};
+    newState[event.target.name] = event.target.value;
+    this.setState(newState);
   }
 
   render() {
@@ -45,22 +38,20 @@ class Login extends React.Component {
               <ControlLabel>Email Address</ControlLabel>
               <FormControl
                 type="email"
-                ref="emailAddress"
-                name="emailAddress"
+                name="email"
                 placeholder="Email Address"
                 value={this.state.email}
-                onChange={this.setEmail.bind(this)}
+                onChange={this.setValue.bind(this)}
               />
             </FormGroup>
             <FormGroup>
               <ControlLabel>Password</ControlLabel>
               <FormControl
                 type="password"
-                ref="password"
                 name="password"
                 placeholder="Password"
                 value={this.state.password}
-                onChange={this.setPassword.bind(this)}
+                onChange={this.setValue.bind(this)}
               />
               <Link className="pull-right" to="/recover-password">Forgot Password?</Link>
             </FormGroup>

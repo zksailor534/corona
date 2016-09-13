@@ -3,8 +3,8 @@ import { withRedux, composeAll } from 'react-komposer-plus';
 
 import Navigation from '../components/navigation';
 
-const mapStateToProps = ({ login }) => ({
-  loggedIn: login.isAuthenticated,
+const mapStateToProps = ({ accounts }) => ({
+  loggedIn: accounts.isAuthenticated,
 });
 
 export default composeAll(

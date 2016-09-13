@@ -1,12 +1,12 @@
 import { useDeps, composeAll } from 'mantra-core';
 
-import Login from '../components/login';
+import Signup from '../components/signup';
 
 export const depsMapper = (context, actions) => ({
-  submitLogin: actions.accounts.submitLogin,
+  submitSignup: actions.accounts.submitSignup,
   context: () => context,
 });
 
 export default composeAll(
   useDeps(depsMapper)
-)(Login);
+)(Signup);

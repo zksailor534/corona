@@ -2,11 +2,11 @@ import React from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Link } from 'react-router';
 import PublicNavigation from './public-navigation';
-import AuthenticatedNavigation from './authenticated-navigation';
+import AuthenticatedNavigation from '../containers/authenticated-navigation';
 
 class Navigation extends React.Component {
-  renderNavigation(hasUser) {
-    return hasUser ? <AuthenticatedNavigation /> : <PublicNavigation />;
+  renderNavigation(loggedIn) {
+    return loggedIn ? <AuthenticatedNavigation /> : <PublicNavigation />;
   }
 
   render() {
@@ -19,7 +19,7 @@ class Navigation extends React.Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          { this.renderNavigation(this.props.hasUser) }
+          { this.renderNavigation(this.props.loggedIn) }
         </Navbar.Collapse>
       </Navbar>
     );
@@ -27,7 +27,7 @@ class Navigation extends React.Component {
 }
 
 Navigation.propTypes = {
-  hasUser: React.PropTypes.object,
+  loggedIn: React.PropTypes.bool.isRequired,
 };
 
 export default Navigation;

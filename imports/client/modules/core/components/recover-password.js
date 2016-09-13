@@ -1,15 +1,25 @@
 import React from 'react';
 import { Row, Col, Alert, FormGroup, FormControl, Button } from 'react-bootstrap';
-import handleRecoverPassword from '../libs/recover-password';
+// import validate from 'validate.js';
 
 class RecoverPassword extends React.Component {
-  // componentDidMount() {
-  //   handleRecoverPassword({ component: this });
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+    };
+  }
 
   handleSubmit(event) {
     event.preventDefault();
-    handleRecoverPassword({ component: this });
+    this.props.recoverPassword({ email: this.state.email });
+  }
+
+  setValue(event) {
+    event.preventDefault();
+    const newState = {};
+    newState[event.target.name] = event.target.value;
+    this.setState(newState);
   }
 
   render() {
@@ -28,9 +38,10 @@ class RecoverPassword extends React.Component {
             <FormGroup>
               <FormControl
                 type="email"
-                ref="emailAddress"
-                name="emailAddress"
+                name="email"
                 placeholder="Email Address"
+                value={this.state.email}
+                onChange={this.setValue.bind(this)}
               />
             </FormGroup>
             <Button type="submit" bsStyle="success">Recover Password</Button>
@@ -40,5 +51,9 @@ class RecoverPassword extends React.Component {
     );
   }
 }
+
+RecoverPassword.propTypes = {
+  recoverPassword: React.PropTypes.func.isRequired,
+};
 
 export default RecoverPassword;

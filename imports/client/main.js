@@ -15,14 +15,14 @@ import coreModule from './modules/core';
 import documentsModule from './modules/documents';
 
 // Combine Reducers
-const reducer = combineReducers({
-  ...coreModule.reducer,
-  ...documentsModule.reducer,
+const reducers = combineReducers({
+  ...coreModule.reducers,
+  ...documentsModule.reducers,
   routing: routerReducer,
 });
 
 // Init Context
-const context = initContext({ reducer });
+const context = initContext({ reducers });
 
 // Create App
 const app = createApp(context);

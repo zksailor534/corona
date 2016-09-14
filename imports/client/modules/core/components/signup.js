@@ -1,103 +1,124 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-// import validate from 'validate.js';
+import {
+  Row,
+  Col,
+  FormGroup,
+  ControlLabel,
+  FormControl,
+  Button,
+  HelpBlock,
+} from 'react-bootstrap';
+import { Field, reduxForm } from 'redux-form';
+import zxcvbn from 'zxcvbn';
 
-class Signup extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      firstName: '',
-      lastName: '',
-    };
+const validate = values => {
+  const errors = {};
+  console.log(values);
+  if (!values.firstName) {
+    errors.firstName = 'Required';
   }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.submitSignup({
-      email: this.state.email,
-      password: this.state.password,
-      profile: {
-        name: {
-          first: this.state.firstName,
-          last: this.state.lastName,
-        },
-      },
-    });
+  if (!values.lastName) {
+    errors.lastName = 'Required';
   }
-
-  setValue(event) {
-    event.preventDefault();
-    const newState = {};
-    newState[event.target.name] = event.target.value;
-    this.setState(newState);
+  if (!values.email) {
+    errors.email = 'Required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address';
   }
-
-  render() {
-    return (
-      <Row>
-        <Col xs={ 12 } sm={ 6 } md={ 4 }>
-          <h4 className="page-header">Sign Up</h4>
-          <form ref="signup" className="signup" onSubmit={ this.handleSubmit.bind(this) }>
-            <Row>
-              <Col xs={ 6 } sm={ 6 }>
-                <FormGroup>
-                  <ControlLabel>First Name</ControlLabel>
-                  <FormControl
-                    type="text"
-                    name="firstName"
-                    placeholder="First Name"
-                    value={this.state.firstName}
-                    onChange={this.setValue.bind(this)}
-                  />
-                </FormGroup>
-              </Col>
-              <Col xs={ 6 } sm={ 6 }>
-                <FormGroup>
-                  <ControlLabel>Last Name</ControlLabel>
-                  <FormControl
-                    type="text"
-                    name="lastName"
-                    placeholder="Last Name"
-                    value={this.state.lastName}
-                    onChange={this.setValue.bind(this)}
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
-            <FormGroup>
-              <ControlLabel>Email Address</ControlLabel>
-              <FormControl
-                type="text"
-                name="email"
-                placeholder="Email Address"
-                value={this.state.email}
-                onChange={this.setValue.bind(this)}
-              />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>Password</ControlLabel>
-              <FormControl
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={this.state.password}
-                onChange={this.setValue.bind(this)}
-              />
-            </FormGroup>
-            <Button type="submit" bsStyle="success">Sign Up</Button>
-          </form>
-          <p>Already have an account? <Link to="/login">Log In</Link>.</p>
-        </Col>
-      </Row>
-    );
+  if (!values.password) {
+    errors.password = 'Required';
+  } else {
+    const pr = zxcvbn(values.password);
+    if (pr.score < 2) errors.password = 'Password too weak';
   }
-}
-
-Signup.propTypes = {
-  submitSignup: React.PropTypes.func.isRequired,
+  return errors;
 };
 
-export default Signup;
+const renderField = ({ name, label, type, placeholder, meta: { touched, error } }) => (
+  <FormGroup
+    controlId={name}
+    validationState={touched && error ? 'error' : null}
+  >
+    <ControlLabel>{label}</ControlLabel>
+    <FormControl
+      type={type}
+      name={name}
+      placeholder={placeholder}
+    />
+    {touched && error && <HelpBlock>{error}</HelpBlock>}
+  </FormGroup>
+);
+
+renderField.propTypes = {
+  name: React.PropTypes.string,
+  label: React.PropTypes.string,
+  type: React.PropTypes.string.isRequired,
+  placeholder: React.PropTypes.string,
+  meta: React.PropTypes.object,
+};
+
+const Signup = (props) => {
+  const { handleSubmit, pristine, reset, submitting } = props;
+  return (
+    <Row>
+      <Col xs={ 12 } sm={ 8 } md={ 6 }>
+        <h4 className="page-header">Sign Up</h4>
+        <form className="signup" onSubmit={ handleSubmit }>
+          <Row>
+            <Col xs={ 6 } sm={ 6 }>
+              <Field
+                name="firstName"
+                label="First Name"
+                type="text"
+                placeholder="First Name"
+                component={ renderField }/>
+            </Col>
+            <Col xs={ 6 } sm={ 6 }>
+              <Field
+                name="lastName"
+                label="Last Name"
+                type="text"
+                placeholder="Last Name"
+                component={ renderField }/>
+            </Col>
+          </Row>
+          <Field
+            name="email"
+            label="Email Address"
+            type="email"
+            placeholder="Email Address"
+            component={ renderField }/>
+          <Field
+            name="password"
+            label="Password"
+            type="password"
+            placeholder="Password"
+            component={ renderField }/>
+          <Button
+            type="submit"
+            bsStyle="success"
+            disabled={pristine || submitting}
+            onClick={reset}>
+            Sign Up
+          </Button>
+          <span style={{ float: 'right' }}>
+            Already have an account? <Link to="/login">Log In</Link>.
+          </span>
+        </form>
+      </Col>
+    </Row>
+  );
+};
+
+Signup.propTypes = {
+  handleSubmit: React.PropTypes.func.isRequired,
+  pristine: React.PropTypes.bool,
+  reset: React.PropTypes.func,
+  submitting: React.PropTypes.bool,
+};
+
+export default reduxForm({
+  form: 'signup',
+  validate,
+})(Signup);

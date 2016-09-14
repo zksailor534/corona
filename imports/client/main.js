@@ -3,6 +3,7 @@ import { createApp } from 'mantra-core';
 // Redux
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form';
 
 // Import bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -19,6 +20,7 @@ const reducers = combineReducers({
   ...coreModule.reducers,
   ...documentsModule.reducers,
   routing: routerReducer,
+  form: formReducer,
 });
 
 // Init Context

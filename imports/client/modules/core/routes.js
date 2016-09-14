@@ -12,7 +12,7 @@ import Login from './containers/login';
 import NotFound from './components/not-found';
 import RecoverPassword from './containers/recover-password';
 import ResetPassword from './containers/reset-password';
-import Signup from './containers/signup';
+import Signup from './components/signup';
 
 // Documents Components
 import Documents from '../documents/components/documents';

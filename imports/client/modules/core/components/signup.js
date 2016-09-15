@@ -11,6 +11,7 @@ import {
   HelpBlock,
   Button,
 } from 'react-bootstrap';
+import zxcvbn from 'zxcvbn';
 
 export const validate = values => {
   const errors = {};
@@ -27,11 +28,13 @@ export const validate = values => {
   }
   if (!values.password) {
     errors.password = 'Required';
+  } else {
+    errors.password = zxcvbn(values.password).score;
   }
   return errors;
 };
 
-const renderField = ({ input, name, label, type, meta: { touched, error } }) => {
+const inputField = ({ input, name, label, type, meta: { touched, error } }) => {
   let valid = null;
   if (touched) {
     if (error) {
@@ -53,12 +56,70 @@ const renderField = ({ input, name, label, type, meta: { touched, error } }) => 
         type={type}
         placeholder={label}
       />
-    {touched && error && <HelpBlock>{error}</HelpBlock> }
+      {touched && error && <HelpBlock>{error}</HelpBlock> }
     </FormGroup>
   );
 };
 
-renderField.propTypes = {
+inputField.propTypes = {
+  input: React.PropTypes.object,
+  name: React.PropTypes.string,
+  label: React.PropTypes.string,
+  type: React.PropTypes.string,
+  meta: React.PropTypes.object,
+};
+
+const passwordField = ({ input, name, label, type, meta: { touched, error } }) => {
+  let valid = null;
+  let message = null;
+
+  if (touched) {
+    switch (error) {
+      case 'Required':
+        valid = 'error';
+        message = 'Required';
+        break;
+      case 1:
+        valid = 'error';
+        message = 'Password too weak';
+        break;
+      case 2:
+        valid = 'warning';
+        message = 'Password okay';
+        break;
+      case 3:
+        valid = 'success';
+        message = 'Password good';
+        break;
+      case 4:
+        valid = 'success';
+        message = 'Password strong';
+        break;
+      default:
+        valid = 'error';
+        message = 'Password too weak';
+        break;
+    }
+  }
+
+  return (
+    <FormGroup
+      controlId={name}
+      validationState={valid}
+    >
+      <ControlLabel>{label}</ControlLabel>
+      <FormControl
+        {...input}
+        name={name}
+        type={type}
+        placeholder={label}
+      />
+    {message && <HelpBlock>{message}</HelpBlock> }
+    </FormGroup>
+  );
+};
+
+passwordField.propTypes = {
   input: React.PropTypes.object,
   name: React.PropTypes.string,
   label: React.PropTypes.string,
@@ -74,14 +135,14 @@ const Signup = (props) => {
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col xs={ 12 } sm={ 6 } md={ 6 } lg={ 6 }>
-            <Field name='firstName' type='text' component={renderField} label='First Name'/>
+            <Field name='firstName' type='text' component={inputField} label='First Name'/>
           </Col>
           <Col xs={ 12 } sm={ 6 } md={ 6 } lg={ 6 }>
-            <Field name='lastName' type='text' component={renderField} label='Last Name'/>
+            <Field name='lastName' type='text' component={inputField} label='Last Name'/>
           </Col>
         </Row>
-        <Field name='email' type='email' component={renderField} label='Email Address'/>
-        <Field name='password' type='password' component={renderField} label='Password'/>
+        <Field name='email' type='email' component={inputField} label='Email Address'/>
+        <Field name='password' type='password' component={passwordField} label='Password'/>
         <div>
           <Button type='submit' disabled={pristine || submitting || invalid}>Submit</Button>
           <span className='pull-right'>

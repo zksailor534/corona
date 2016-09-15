@@ -1,7 +1,8 @@
 import { useDeps, composeAll } from 'mantra-core';
 import { reduxForm } from 'redux-form';
 
-import Login, { validate } from '../components/login';
+import Login from '../components/login';
+import validate from '../lib/validate-field';
 
 export const depsMapper = (context, actions) => ({
   onSubmit: actions.accounts.submitLogin,

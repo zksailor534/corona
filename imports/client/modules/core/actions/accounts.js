@@ -96,7 +96,7 @@ export default {
       }
     });
   },
-  submitSignup({ Meteor, Store, Bert }, { email, password, profile }) {
+  submitSignup({ Meteor, Store, Bert }, { email, password, firstName, lastName }) {
     const { dispatch } = Store;
 
     // Change state to signup request
@@ -105,7 +105,12 @@ export default {
     const user = {
       email,
       password,
-      profile,
+      profile: {
+        name: {
+          first: firstName,
+          last: lastName,
+        },
+      },
     };
 
     // Call signup procedure

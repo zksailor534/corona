@@ -60,15 +60,15 @@ renderField.propTypes = {
 };
 
 const Login = (props) => {
-  const { handleSubmit, pristine, submitting } = props;
+  const { handleSubmit, pristine, submitting, invalid } = props;
   return (
-    <Col xs={ 12 } sm={ 8 } md={ 6 }>
+    <Col xs={ 12 } sm={ 8 } md={ 6 } lg={ 6 }>
       <h4 className="page-header">Login</h4>
       <Form onSubmit={handleSubmit}>
         <Field name='email' type='email' component={renderField} label='Email Address'/>
         <Field name='password' type='password' component={renderField} label='Password'/>
         <div>
-          <Button type="submit" disabled={pristine || submitting}>Submit</Button>
+          <Button type="submit" disabled={pristine || submitting || invalid}>Submit</Button>
           <Link className="pull-right" to="/recover-password">Forgot Password?</Link>
         </div>
       </Form>
@@ -81,6 +81,7 @@ Login.propTypes = {
   pristine: React.PropTypes.bool,
   reset: React.PropTypes.func,
   submitting: React.PropTypes.bool,
+  invalid: React.PropTypes.bool,
 };
 
 export default Login;

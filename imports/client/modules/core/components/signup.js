@@ -1,20 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { Field } from 'redux-form';
 import {
+  Form,
   Row,
   Col,
   FormGroup,
-  ControlLabel,
   FormControl,
-  Button,
+  ControlLabel,
   HelpBlock,
+  Button,
 } from 'react-bootstrap';
-import { Field, reduxForm } from 'redux-form';
-import zxcvbn from 'zxcvbn';
 
-const validate = values => {
+export const validate = values => {
   const errors = {};
-  console.log(values);
   if (!values.firstName) {
     errors.firstName = 'Required';
   }
@@ -28,97 +27,78 @@ const validate = values => {
   }
   if (!values.password) {
     errors.password = 'Required';
-  } else {
-    const pr = zxcvbn(values.password);
-    if (pr.score < 2) errors.password = 'Password too weak';
   }
   return errors;
 };
 
-const renderField = ({ name, label, type, placeholder, meta: { touched, error } }) => (
-  <FormGroup
-    controlId={name}
-    validationState={touched && error ? 'error' : null}
-  >
-    <ControlLabel>{label}</ControlLabel>
-    <FormControl
-      type={type}
-      name={name}
-      placeholder={placeholder}
-    />
-    {touched && error && <HelpBlock>{error}</HelpBlock>}
-  </FormGroup>
-);
+const renderField = ({ input, name, label, type, meta: { touched, error } }) => {
+  let valid = null;
+  if (touched) {
+    if (error) {
+      valid = 'error';
+    } else {
+      valid = 'success';
+    }
+  }
+
+  return (
+    <FormGroup
+      controlId={name}
+      validationState={valid}
+    >
+      <ControlLabel>{label}</ControlLabel>
+      <FormControl
+        {...input}
+        name={name}
+        type={type}
+        placeholder={label}
+      />
+    {touched && error && <HelpBlock>{error}</HelpBlock> }
+    </FormGroup>
+  );
+};
 
 renderField.propTypes = {
+  input: React.PropTypes.object,
   name: React.PropTypes.string,
   label: React.PropTypes.string,
-  type: React.PropTypes.string.isRequired,
-  placeholder: React.PropTypes.string,
+  type: React.PropTypes.string,
   meta: React.PropTypes.object,
 };
 
 const Signup = (props) => {
-  const { handleSubmit, pristine, reset, submitting } = props;
+  const { handleSubmit, pristine, submitting, invalid } = props;
   return (
-    <Row>
-      <Col xs={ 12 } sm={ 8 } md={ 6 }>
-        <h4 className="page-header">Sign Up</h4>
-        <form className="signup" onSubmit={ handleSubmit }>
-          <Row>
-            <Col xs={ 6 } sm={ 6 }>
-              <Field
-                name="firstName"
-                label="First Name"
-                type="text"
-                placeholder="First Name"
-                component={ renderField }/>
-            </Col>
-            <Col xs={ 6 } sm={ 6 }>
-              <Field
-                name="lastName"
-                label="Last Name"
-                type="text"
-                placeholder="Last Name"
-                component={ renderField }/>
-            </Col>
-          </Row>
-          <Field
-            name="email"
-            label="Email Address"
-            type="email"
-            placeholder="Email Address"
-            component={ renderField }/>
-          <Field
-            name="password"
-            label="Password"
-            type="password"
-            placeholder="Password"
-            component={ renderField }/>
-          <Button
-            type="submit"
-            bsStyle="success"
-            disabled={pristine || submitting}
-            onClick={reset}>
-            Sign Up
-          </Button>
-          <span style={{ float: 'right' }}>
-            Already have an account? <Link to="/login">Log In</Link>.
+    <Col xs={ 12 } sm={ 8 } md={ 6 } lg={ 6 }>
+      <h4 className='page-header'>Sign Up</h4>
+      <Form onSubmit={handleSubmit}>
+        <Row>
+          <Col xs={ 12 } sm={ 6 } md={ 6 } lg={ 6 }>
+            <Field name='firstName' type='text' component={renderField} label='First Name'/>
+          </Col>
+          <Col xs={ 12 } sm={ 6 } md={ 6 } lg={ 6 }>
+            <Field name='lastName' type='text' component={renderField} label='Last Name'/>
+          </Col>
+        </Row>
+        <Field name='email' type='email' component={renderField} label='Email Address'/>
+        <Field name='password' type='password' component={renderField} label='Password'/>
+        <div>
+          <Button type='submit' disabled={pristine || submitting || invalid}>Submit</Button>
+          <span className='pull-right'>
+            Already have an account? <Link to='/login'>Forgot Password?</Link>
           </span>
-        </form>
-      </Col>
-    </Row>
+        </div>
+      </Form>
+    </Col>
   );
 };
 
 Signup.propTypes = {
-  handleSubmit: React.PropTypes.func.isRequired,
+  handleSubmit: React.PropTypes.func,
   pristine: React.PropTypes.bool,
   reset: React.PropTypes.func,
   submitting: React.PropTypes.bool,
+  invalid: React.PropTypes.bool,
 };
 
-export default reduxForm({
-  form: 'signup',
-  validate,
-})(Signup);
+export default Signup;

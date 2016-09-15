@@ -1,17 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Field } from 'redux-form';
-import {
-  Form,
-  Row,
-  Col,
-  FormGroup,
-  FormControl,
-  ControlLabel,
-  HelpBlock,
-  Button,
-} from 'react-bootstrap';
+import { Form, Row, Col, Button } from 'react-bootstrap';
 import zxcvbn from 'zxcvbn';
+import { inputField, passwordField } from './form-fields';
 
 export const validate = values => {
   const errors = {};
@@ -56,80 +48,6 @@ export const validate = values => {
     }
   }
   return errors;
-};
-
-const inputField = ({ input, name, label, type, meta: { touched, error } }) => {
-  let valid = null;
-  if (touched) {
-    if (error) {
-      valid = 'error';
-    } else {
-      valid = 'success';
-    }
-  }
-
-  return (
-    <FormGroup
-      controlId={name}
-      validationState={valid}
-    >
-      <ControlLabel>{label}</ControlLabel>
-      <FormControl
-        {...input}
-        name={name}
-        type={type}
-        placeholder={label}
-      />
-      {touched && error && <HelpBlock>{error}</HelpBlock> }
-    </FormGroup>
-  );
-};
-
-inputField.propTypes = {
-  input: React.PropTypes.object,
-  name: React.PropTypes.string,
-  label: React.PropTypes.string,
-  type: React.PropTypes.string,
-  meta: React.PropTypes.object,
-};
-
-const passwordField = ({ input, name, label, type, meta: { dirty, touched, visited, error } }) => {
-  let state = null;
-  let message = null;
-  if (touched && error) {
-    state = error.state;
-    message = error.message;
-  } else if (dirty && visited && error) {
-    state = error.state;
-    message = error.message;
-  } else if (dirty && visited) {
-    state = 'success';
-    message = 'Password safe';
-  }
-
-  return (
-    <FormGroup
-      controlId={name}
-      validationState={state}
-    >
-      <ControlLabel>{label}</ControlLabel>
-      <FormControl
-        {...input}
-        name={name}
-        type={type}
-        placeholder={label}
-      />
-    {visited && message && <HelpBlock>{message}</HelpBlock> }
-    </FormGroup>
-  );
-};
-
-passwordField.propTypes = {
-  input: React.PropTypes.object,
-  name: React.PropTypes.string,
-  label: React.PropTypes.string,
-  type: React.PropTypes.string,
-  meta: React.PropTypes.object,
 };
 
 const Signup = (props) => {

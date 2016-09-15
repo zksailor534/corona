@@ -27,9 +27,33 @@ export const validate = values => {
     errors.email = 'Invalid email address';
   }
   if (!values.password) {
-    errors.password = 'Required';
+    errors.password = {
+      message: 'Required',
+      state: 'error',
+    };
   } else {
-    errors.password = zxcvbn(values.password).score;
+    switch (zxcvbn(values.password).score) {
+      case 0:
+        errors.password = {
+          message: 'Password too weak',
+          state: 'error',
+        };
+        break;
+      case 1:
+        errors.password = {
+          message: 'Password very weak',
+          state: 'error',
+        };
+        break;
+      case 2:
+        errors.password = {
+          message: 'Password somewhat weak',
+          state: 'warning',
+        };
+        break;
+      default:
+        break;
+    }
   }
   return errors;
 };
@@ -69,43 +93,24 @@ inputField.propTypes = {
   meta: React.PropTypes.object,
 };
 
-const passwordField = ({ input, name, label, type, meta: { touched, error } }) => {
-  let valid = null;
+const passwordField = ({ input, name, label, type, meta: { dirty, touched, visited, error } }) => {
+  let state = null;
   let message = null;
-
-  if (touched) {
-    switch (error) {
-      case 'Required':
-        valid = 'error';
-        message = 'Required';
-        break;
-      case 1:
-        valid = 'error';
-        message = 'Password too weak';
-        break;
-      case 2:
-        valid = 'warning';
-        message = 'Password okay';
-        break;
-      case 3:
-        valid = 'success';
-        message = 'Password good';
-        break;
-      case 4:
-        valid = 'success';
-        message = 'Password strong';
-        break;
-      default:
-        valid = 'error';
-        message = 'Password too weak';
-        break;
-    }
+  if (touched && error) {
+    state = error.state;
+    message = error.message;
+  } else if (dirty && visited && error) {
+    state = error.state;
+    message = error.message;
+  } else if (dirty && visited) {
+    state = 'success';
+    message = 'Password safe';
   }
 
   return (
     <FormGroup
       controlId={name}
-      validationState={valid}
+      validationState={state}
     >
       <ControlLabel>{label}</ControlLabel>
       <FormControl
@@ -114,7 +119,7 @@ const passwordField = ({ input, name, label, type, meta: { touched, error } }) =
         type={type}
         placeholder={label}
       />
-    {message && <HelpBlock>{message}</HelpBlock> }
+    {visited && message && <HelpBlock>{message}</HelpBlock> }
     </FormGroup>
   );
 };

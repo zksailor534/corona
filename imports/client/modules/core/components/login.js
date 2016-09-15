@@ -1,146 +1,86 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { Field } from 'redux-form';
 import {
-  Row,
+  Form,
   Col,
   FormGroup,
-  ControlLabel,
   FormControl,
-  Button,
+  ControlLabel,
   HelpBlock,
+  Button,
 } from 'react-bootstrap';
-import validate from 'validate.js';
 
-const constraints = {
-  email: {
-    email: true,
-  },
+export const validate = values => {
+  const errors = {};
+  if (!values.email) {
+    errors.email = 'Required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address';
+  }
+  if (!values.password) {
+    errors.password = 'Required';
+  }
+  return errors;
 };
 
-class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      validEmail: false,
-      validPassword: false,
-      emailValidationState: null,
-      passwordValidationState: null,
-    };
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    if (this.state.password.length) {
-      this.props.submitLogin({
-        email: this.state.email,
-        password: this.state.password,
-        component: this,
-      });
+const renderField = ({ input, name, label, type, meta: { touched, error } }) => {
+  let valid = null;
+  if (touched) {
+    if (error) {
+      valid = 'error';
     } else {
-      this.setState({
-        validPassword: false,
-        passwordValidationState: null,
-        passwordMessage: 'Please enter password',
-      });
+      valid = 'success';
     }
   }
 
-  setValue(event) {
-    event.preventDefault();
-    const newState = {};
-    newState[event.target.name] = event.target.value;
-    this.setState(newState);
-  }
+  return (
+    <FormGroup
+      controlId={name}
+      validationState={valid}
+    >
+      <ControlLabel>{label}</ControlLabel>
+      <FormControl
+        {...input}
+        name={name}
+        type={type}
+        placeholder={label}
+      />
+    {touched && error && <HelpBlock>{error}</HelpBlock> }
+    </FormGroup>
+  );
+};
 
-  validateEmail(event) {
-    event.preventDefault();
-    if (!event.target.value.length) {
-      this.setState({
-        validEmail: false,
-        emailValidationState: null,
-        emailMessage: 'Please enter valid email',
-      });
-    } else {
-      const res = validate({ email: event.target.value }, constraints);
-      if (res !== undefined) {
-        this.setState({
-          validEmail: false,
-          emailValidationState: 'error',
-          emailMessage: res.email[0],
-        });
-      } else {
-        this.setState({
-          validEmail: true,
-          emailValidationState: 'success',
-          emailMessage: null,
-        });
-      }
-    }
-  }
+renderField.propTypes = {
+  input: React.PropTypes.object,
+  name: React.PropTypes.string,
+  label: React.PropTypes.string,
+  type: React.PropTypes.string,
+  meta: React.PropTypes.object,
+};
 
-  render() {
-    const {
-      email,
-      emailMessage,
-      emailValidationState,
-      password,
-      passwordMessage,
-      passwordValidationState,
-    } = this.state;
-    const buttonState = !this.state.validEmail;
-    return (
-      <Row>
-        <Col xs={ 12 } sm={ 6 } md={ 4 }>
-          <h4 className="page-header">Login</h4>
-          <form ref="login" className="login" onSubmit={ this.handleSubmit.bind(this) }>
-            <FormGroup
-              controlId="emailAddress"
-              validationState={emailValidationState}
-            >
-              <ControlLabel>Email Address</ControlLabel>
-              <FormControl
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                value={email}
-                onBlur={this.validateEmail.bind(this)}
-                onChange={this.setValue.bind(this)}
-              />
-              {emailMessage ? <HelpBlock>{emailMessage}</HelpBlock> : null }
-            </FormGroup>
-            <FormGroup
-              controlId="password"
-              validationState={passwordValidationState}
-            >
-              <ControlLabel>Password</ControlLabel>
-              <FormControl
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={password}
-                onChange={this.setValue.bind(this)}
-              />
-              {passwordMessage ? <HelpBlock>{passwordMessage}</HelpBlock> : null }
-            </FormGroup>
-            <Button
-              type="submit"
-              bsStyle="success"
-              disabled={buttonState}
-            >
-              Login
-            </Button>
-            <Link className="pull-right" to="/recover-password">Forgot Password?</Link>
-          </form>
-        </Col>
-      </Row>
-    );
-  }
-}
+const Login = (props) => {
+  const { handleSubmit, pristine, submitting } = props;
+  return (
+    <Col xs={ 12 } sm={ 8 } md={ 6 }>
+      <h4 className="page-header">Login</h4>
+      <Form onSubmit={handleSubmit}>
+        <Field name='email' type='email' component={renderField} label='Email Address'/>
+        <Field name='password' type='password' component={renderField} label='Password'/>
+        <div>
+          <Button type="submit" disabled={pristine || submitting}>Submit</Button>
+          <Link className="pull-right" to="/recover-password">Forgot Password?</Link>
+        </div>
+      </Form>
+    </Col>
+  );
+};
 
 Login.propTypes = {
-  submitLogin: React.PropTypes.func.isRequired,
+  handleSubmit: React.PropTypes.func,
+  pristine: React.PropTypes.bool,
+  reset: React.PropTypes.func,
+  submitting: React.PropTypes.bool,
 };
 
 export default Login;

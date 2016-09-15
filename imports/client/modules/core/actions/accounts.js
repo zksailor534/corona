@@ -49,7 +49,7 @@ const resetPasswordError = () => ({
 });
 
 export default {
-  submitLogin({ Meteor, Store, Bert }, { email, password, component }) {
+  submitLogin({ Meteor, Store, Bert }, { email, password }) {
     const { dispatch } = Store;
 
     // Change state to login request
@@ -66,9 +66,10 @@ export default {
         // Change state to successful login
         dispatch(receiveLogin(Meteor.user()));
 
-        const { location } = component.props;
-        if (location.state && location.state.nextPathname) {
-          browserHistory.push(location.state.nextPathname);
+        // Redirect to next page
+        const state = Store.getState().routing.locationBeforeTransitions.state;
+        if (state && state.nextPathname) {
+          browserHistory.push(state.nextPathname);
         } else {
           browserHistory.push('/');
         }

@@ -24,7 +24,7 @@ export const titleField = ({ input, name, type, placeholder, meta: { submitting,
         type={type}
         placeholder={placeholder}
       />
-    {submitting && error && <HelpBlock>{message}</HelpBlock> }
+    {message && <HelpBlock>{message}</HelpBlock> }
     </FormGroup>
   );
 };

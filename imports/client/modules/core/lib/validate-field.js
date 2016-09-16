@@ -7,30 +7,45 @@ const validate = values => {
   // First Name (use inputField)
   // ! ------------------------------------------
   if (!values.firstName) {
-    errors.firstName = 'Required';
+    errors.firtName = {
+      message: 'Required',
+      state: 'error',
+    };
   }
 
   // ! ------------------------------------------
   // Last Name (use inputField)
   // ! ------------------------------------------
   if (!values.lastName) {
-    errors.lastName = 'Required';
+    errors.lastName = {
+      message: 'Required',
+      state: 'error',
+    };
   }
 
   // ! ------------------------------------------
   // Email (use inputField)
   // ! ------------------------------------------
   if (!values.email) {
-    errors.email = 'Required';
+    errors.email = {
+      message: 'Required',
+      state: 'error',
+    };
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
+    errors.email = {
+      message: 'Invalid email address',
+      state: 'error',
+    };
   }
 
   // ! ------------------------------------------
   // Password for sign in (use inputField)
   // ! ------------------------------------------
   if (!values.password) {
-    errors.password = 'Required';
+    errors.password = {
+      message: 'Required',
+      state: 'error',
+    };
   }
 
   // ! ------------------------------------------

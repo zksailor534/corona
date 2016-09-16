@@ -6,20 +6,21 @@ import {
   HelpBlock,
 } from 'react-bootstrap';
 
-export const inputField = ({ input, name, label, type, meta: { touched, error } }) => {
-  let valid = null;
-  if (touched) {
-    if (error) {
-      valid = 'error';
-    } else {
-      valid = 'success';
-    }
+export const inputField = ({ input, name, label, type,
+  meta: { touched, error, dirty } }) => {
+  let state = null;
+  let message = null;
+  if (touched && error) {
+    state = error.state;
+    message = error.message;
+  } else if (dirty && touched) {
+    state = 'success';
   }
 
   return (
     <FormGroup
       controlId={name}
-      validationState={valid}
+      validationState={state}
     >
       <ControlLabel>{label}</ControlLabel>
       <FormControl
@@ -28,7 +29,7 @@ export const inputField = ({ input, name, label, type, meta: { touched, error } 
         type={type}
         placeholder={label}
       />
-      {touched && error && <HelpBlock>{error}</HelpBlock> }
+    {message && <HelpBlock>{message}</HelpBlock> }
     </FormGroup>
   );
 };

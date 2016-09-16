@@ -53,7 +53,7 @@ export const passwordField = ({ input, name, label, type,
     message = error.message;
   } else if (dirty && visited) {
     state = 'success';
-    message = 'Password safe';
+    message = 'Password good';
   }
 
   return (

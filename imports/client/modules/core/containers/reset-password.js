@@ -1,6 +1,8 @@
 import { useDeps, composeAll } from 'mantra-core';
+import { reduxForm } from 'redux-form';
 
 import ResetPassword from '../components/reset-password';
+import validate from '../lib/validate-field';
 
 export const depsMapper = (context, actions) => ({
   resetPassword: actions.accounts.resetPassword,
@@ -9,4 +11,4 @@ export const depsMapper = (context, actions) => ({
 
 export default composeAll(
   useDeps(depsMapper)
-)(ResetPassword);
+)(reduxForm({ form: 'signup', validate })(ResetPassword));

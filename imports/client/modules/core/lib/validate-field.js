@@ -3,29 +3,39 @@ import zxcvbn from 'zxcvbn';
 const validate = values => {
   const errors = {};
 
-  // First Name
+  // ! ------------------------------------------
+  // First Name (use inputField)
+  // ! ------------------------------------------
   if (!values.firstName) {
     errors.firstName = 'Required';
   }
 
-  // Last Name
+  // ! ------------------------------------------
+  // Last Name (use inputField)
+  // ! ------------------------------------------
   if (!values.lastName) {
     errors.lastName = 'Required';
   }
 
-  // Email
+  // ! ------------------------------------------
+  // Email (use inputField)
+  // ! ------------------------------------------
   if (!values.email) {
     errors.email = 'Required';
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address';
   }
 
-  // Password for sign in
+  // ! ------------------------------------------
+  // Password for sign in (use inputField)
+  // ! ------------------------------------------
   if (!values.password) {
     errors.password = 'Required';
   }
 
-  // Password creation
+  // ! ------------------------------------------
+  // Password creation (use passwordField)
+  // ! ------------------------------------------
   if (!values.passwordCreate) {
     errors.passwordCreate = {
       message: 'Required',
@@ -55,6 +65,18 @@ const validate = values => {
         break;
     }
   }
+
+  // ! ------------------------------------------
+  // Password confirmation (use inputField)
+  // ! ------------------------------------------
+  if (!values.passwordConfirm) {
+    errors.passwordConfirm = 'Required';
+  } else if (!errors.passwordCreate) {
+    if (values.passwordCreate !== values.passwordConfirm) {
+      errors.passwordConfirm = 'Passwords must match!';
+    }
+  }
+
   return errors;
 };
 

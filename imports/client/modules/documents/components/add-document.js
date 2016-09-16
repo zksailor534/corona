@@ -1,34 +1,24 @@
 import React from 'react';
-import { FormGroup, FormControl } from 'react-bootstrap';
+import { Field } from 'redux-form';
+import { Form } from 'react-bootstrap';
+import { titleField } from './form-fields';
 
-class AddDocument extends React.Component {
-  handleInsertDocument(event) {
-    const target = event.target;
-    const title = target.value.trim();
-    const { insert } = this.props;
-
-    if (title !== '' && event.keyCode === 13) {
-      insert({
-        title,
-      });
-    }
-  }
-
-  render() {
-    return (
-      <FormGroup>
-        <FormControl
-          type="text"
-          onKeyUp={ this.handleInsertDocument.bind(this) }
-          placeholder="Type a document title and press enter..."
-        />
-      </FormGroup>
-    );
-  }
-}
+const AddDocument = (props) => {
+  const { handleSubmit } = props;
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Field
+        name='title'
+        type='text'
+        component={titleField}
+        placeholder='Type a document title and press enter...'
+      />
+    </Form>
+  );
+};
 
 AddDocument.propTypes = {
-  insert: React.PropTypes.func.isRequired,
+  handleSubmit: React.PropTypes.func,
 };
 
 export default AddDocument;

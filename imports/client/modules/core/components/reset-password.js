@@ -53,7 +53,6 @@ ResetPassword.propTypes = {
   resetPassword: React.PropTypes.func,
   handleSubmit: React.PropTypes.func,
   pristine: React.PropTypes.bool,
-  reset: React.PropTypes.func,
   submitting: React.PropTypes.bool,
   invalid: React.PropTypes.bool,
   params: React.PropTypes.object,

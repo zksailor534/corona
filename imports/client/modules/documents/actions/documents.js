@@ -1,10 +1,11 @@
 import { Bert } from 'meteor/themeteorchef:bert';
+import { reset } from 'redux-form';
 
 export default {
   // ! ------------------------------------------
   // Insert Document
   // ! ------------------------------------------
-  insert({ Meteor }, { title }) {
+  insert({ Meteor, Store }, { title }) {
     const id = Meteor.uuid();
 
     Meteor.call(
@@ -16,7 +17,7 @@ export default {
         if (error) {
           Bert.alert(error.reason, 'danger');
         } else {
-          // target.value = ''; UPDATE REDUX STATE
+          Store.dispatch(reset('documents-add'));
           Bert.alert('Document added!', 'success');
         }
       }

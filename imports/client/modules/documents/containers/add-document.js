@@ -11,4 +11,4 @@ export const depsMapper = (context, actions) => ({
 
 export default composeAll(
   useDeps(depsMapper)
-)(reduxForm({ form: 'add-document', validate })(AddDocument));
+)(reduxForm({ form: 'documents-add', validate })(AddDocument));

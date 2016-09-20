@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Tracker } from 'meteor/tracker';
 import { Bert } from 'meteor/themeteorchef:bert';
-import * as Collections from '/lib/collections';
+import * as Collections from '/imports/lib/collections';
 
 // Redux
 import { createStore, applyMiddleware, compose } from 'redux';

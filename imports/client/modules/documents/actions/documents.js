@@ -1,8 +1,13 @@
 import { Bert } from 'meteor/themeteorchef:bert';
+import { reset } from 'redux-form';
 
 export default {
-  insert({ Meteor }, { title }) {
+  // ! ------------------------------------------
+  // Insert Document
+  // ! ------------------------------------------
+  insert({ Meteor, Store }, { title }) {
     const id = Meteor.uuid();
+
     Meteor.call(
       'documents.insert',
       {
@@ -12,12 +17,16 @@ export default {
         if (error) {
           Bert.alert(error.reason, 'danger');
         } else {
-          // target.value = ''; UPDATE REDUX STATE
+          Store.dispatch(reset('documents-add'));
           Bert.alert('Document added!', 'success');
         }
       }
     );
   },
+
+  // ! ------------------------------------------
+  // Update Document
+  // ! ------------------------------------------
   update({ Meteor }, { _id, title }) {
     Meteor.call(
       'documents.update',
@@ -33,6 +42,10 @@ export default {
       }
     );
   },
+
+  // ! ------------------------------------------
+  // Remove Document
+  // ! ------------------------------------------
   remove({ Meteor }, { _id }) {
     Meteor.call(
       'documents.remove',

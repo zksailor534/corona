@@ -1,6 +1,9 @@
 import { Accounts } from 'meteor/accounts-base';
 import { browserHistory } from 'react-router';
 
+// ! ------------------------------------------
+// Redux action creators
+// ! ------------------------------------------
 const requestLogin = () => ({
   type: 'LOGIN_REQUEST',
 });
@@ -49,7 +52,10 @@ const resetPasswordError = () => ({
 });
 
 export default {
-  submitLogin({ Meteor, Store, Bert }, { email, password, component }) {
+// ! ------------------------------------------
+// Submit Login
+// ! ------------------------------------------
+  submitLogin({ Meteor, Store, Bert }, { email, password }) {
     const { dispatch } = Store;
 
     // Change state to login request
@@ -66,15 +72,20 @@ export default {
         // Change state to successful login
         dispatch(receiveLogin(Meteor.user()));
 
-        const { location } = component.props;
-        if (location.state && location.state.nextPathname) {
-          browserHistory.push(location.state.nextPathname);
+        // Redirect to next page
+        const state = Store.getState().routing.locationBeforeTransitions.state;
+        if (state && state.nextPathname) {
+          browserHistory.push(state.nextPathname);
         } else {
           browserHistory.push('/');
         }
       }
     });
   },
+
+  // ! ------------------------------------------
+  // Submit Logout
+  // ! ------------------------------------------
   submitLogout({ Meteor, Store, Bert }) {
     const { dispatch } = Store;
 
@@ -95,7 +106,11 @@ export default {
       }
     });
   },
-  submitSignup({ Meteor, Store, Bert }, { email, password, profile }) {
+
+  // ! ------------------------------------------
+  // Submit Signup
+  // ! ------------------------------------------
+  submitSignup({ Meteor, Store, Bert }, { email, password, firstName, lastName }) {
     const { dispatch } = Store;
 
     // Change state to signup request
@@ -104,7 +119,12 @@ export default {
     const user = {
       email,
       password,
-      profile,
+      profile: {
+        name: {
+          first: firstName,
+          last: lastName,
+        },
+      },
     };
 
     // Call signup procedure
@@ -123,6 +143,10 @@ export default {
       }
     });
   },
+
+  // ! ------------------------------------------
+  // Recover Password
+  // ! ------------------------------------------
   recoverPassword({ Bert }, { email }) {
     // Call forgot password procedure
     Accounts.forgotPassword({
@@ -135,7 +159,12 @@ export default {
       }
     });
   },
-  resetPassword({ Meteor, Store, Bert }, { token, password }) {
+
+  // ! ------------------------------------------
+  // Reset Password
+  // ! ------------------------------------------
+  resetPassword({ Meteor, Store, Bert }, data) {
+    const { token, password } = data;
     const { dispatch } = Store;
 
     // Change state to password reset request

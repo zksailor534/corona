@@ -17,12 +17,15 @@ A Meteor application boilerplate that combines two separate boilerplates and app
 * Redux
 * React-Router-Redux
 * React Helmet
+* Redux-Form
 
 ### Future Tasks
 
 - [ ] Configure tests
-- [ ] Form validation
-- [ ] Redux state
+- [x] Form validation for core
+- [x] Redux state for core
+- [ ] Form validation for documents
+- [ ] Redux state for documents
 
 ### Feedback
 

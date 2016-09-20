@@ -12,7 +12,7 @@ const RecoverPassword = (props) => {
         Enter your email address below to receive a link to reset your password.
       </Alert>
       <Form onSubmit={handleSubmit}>
-        <Field name='email' type='email' component={inputField} label='Email Address'/>
+        <Field name='email' type='text' component={inputField} label='Email Address'/>
         <Button type='submit' disabled={pristine || submitting || invalid}>Submit</Button>
       </Form>
     </Col>

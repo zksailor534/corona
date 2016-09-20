@@ -10,7 +10,7 @@ const Login = (props) => {
     <Col xs={ 12 } sm={ 8 } md={ 6 } lg={ 6 }>
       <h4 className='page-header'>Login</h4>
       <Form onSubmit={handleSubmit}>
-        <Field name='email' type='email' component={inputField} label='Email Address'/>
+        <Field name='email' type='text' component={inputField} label='Email Address'/>
         <Field name='password' type='password' component={inputField} label='Password'/>
         <div>
           <Button type='submit' disabled={pristine || submitting || invalid}>Submit</Button>

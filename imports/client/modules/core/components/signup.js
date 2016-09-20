@@ -18,7 +18,7 @@ const Signup = (props) => {
             <Field name='lastName' type='text' component={inputField} label='Last Name'/>
           </Col>
         </Row>
-        <Field name='email' type='email' component={inputField} label='Email Address'/>
+        <Field name='email' type='text' component={inputField} label='Email Address'/>
         <Field name='passwordCreate' type='password' component={passwordField} label='Password'/>
         <div>
           <Button type='submit' disabled={pristine || submitting || invalid}>Submit</Button>

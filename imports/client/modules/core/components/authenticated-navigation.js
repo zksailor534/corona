@@ -1,18 +1,13 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
 import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 import { Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
-import { Meteor } from 'meteor/meteor';
 
-const handleLogout = () => Meteor.logout(() => browserHistory.push('/login'));
-
-const userName = () => {
-  const user = Meteor.user();
+const userName = (user) => {
   const name = user && user.profile ? user.profile.name : '';
   return user ? `${name.first} ${name.last}` : '';
 };
 
-const AuthenticatedNavigation = () => (
+const AuthenticatedNavigation = ({ submitLogout, user }) => (
   <div>
     <Nav>
       <IndexLinkContainer to="/">
@@ -23,11 +18,16 @@ const AuthenticatedNavigation = () => (
       </LinkContainer>
     </Nav>
     <Nav pullRight>
-      <NavDropdown eventKey={ 3 } title={ userName() } id="basic-nav-dropdown">
-        <MenuItem eventKey={ 3.1 } onClick={ handleLogout }>Logout</MenuItem>
+      <NavDropdown eventKey={ 3 } title={ userName(user) } id="basic-nav-dropdown">
+        <MenuItem eventKey={ 3.1 } onClick={ () => submitLogout() }>Logout</MenuItem>
       </NavDropdown>
     </Nav>
   </div>
 );
+
+AuthenticatedNavigation.propTypes = {
+  submitLogout: React.PropTypes.func.isRequired,
+  user: React.PropTypes.object.isRequired,
+};
 
 export default AuthenticatedNavigation;

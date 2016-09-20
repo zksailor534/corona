@@ -1,7 +1,7 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
-import { Documents } from '/lib/collections';
+import { Documents } from '/imports/lib/collections';
 
 import { rateLimit } from '../libs/rate-limit.js';
 

@@ -1,14 +1,14 @@
 import { useDeps, composeAll } from 'mantra-core';
 import { reduxForm } from 'redux-form';
 
-import AddDocument from '../components/add-document';
+import Login from '../components/login';
 import validate from '../lib/validate-field';
 
 export const depsMapper = (context, actions) => ({
-  onSubmit: actions.documents.insert,
+  onSubmit: actions.accounts.submitLogin,
   context: () => context,
 });
 
 export default composeAll(
   useDeps(depsMapper)
-)(reduxForm({ form: 'documents-add', validate })(AddDocument));
+)(reduxForm({ form: 'login', validate })(Login));

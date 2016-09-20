@@ -1,49 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import handleLogin from '../libs/login';
+import { Field } from 'redux-form';
+import { Form, Col, Button } from 'react-bootstrap';
+import { inputField } from './form-fields';
 
-class Login extends React.Component {
-  // componentDidMount() {
-  //   handleLogin({ component: this });
-  // }
+const Login = (props) => {
+  const { handleSubmit, pristine, submitting, invalid } = props;
+  return (
+    <Col xs={ 12 } sm={ 8 } md={ 6 } lg={ 6 }>
+      <h4 className='page-header'>Login</h4>
+      <Form onSubmit={handleSubmit}>
+        <Field name='email' type='text' component={inputField} label='Email Address'/>
+        <Field name='password' type='password' component={inputField} label='Password'/>
+        <div>
+          <Button type='submit' disabled={pristine || submitting || invalid}>Submit</Button>
+          <Link className='pull-right' to='/recover-password'>Forgot Password?</Link>
+        </div>
+      </Form>
+    </Col>
+  );
+};
 
-  handleSubmit(event) {
-    event.preventDefault();
-    handleLogin({ component: this });
-  }
-
-  render() {
-    return (
-      <Row>
-        <Col xs={ 12 } sm={ 6 } md={ 4 }>
-          <h4 className="page-header">Login</h4>
-          <form ref="login" className="login" onSubmit={ this.handleSubmit.bind(this) }>
-            <FormGroup>
-              <ControlLabel>Email Address</ControlLabel>
-              <FormControl
-                type="email"
-                ref="emailAddress"
-                name="emailAddress"
-                placeholder="Email Address"
-              />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>Password</ControlLabel>
-              <FormControl
-                type="password"
-                ref="password"
-                name="password"
-                placeholder="Password"
-              />
-              <Link className="pull-right" to="/recover-password">Forgot Password?</Link>
-            </FormGroup>
-            <Button type="submit" bsStyle="success">Login</Button>
-          </form>
-        </Col>
-      </Row>
-    );
-  }
-}
+Login.propTypes = {
+  handleSubmit: React.PropTypes.func,
+  pristine: React.PropTypes.bool,
+  reset: React.PropTypes.func,
+  submitting: React.PropTypes.bool,
+  invalid: React.PropTypes.bool,
+};
 
 export default Login;

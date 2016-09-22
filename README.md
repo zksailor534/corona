@@ -28,6 +28,7 @@ A Meteor application boilerplate that combines two separate boilerplates and app
 - [x] Redux state for core
 - [ ] Form validation for documents
 - [ ] Redux state for documents
+- [ ] Modularize React Router
 
 ### Feedback
 

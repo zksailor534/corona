@@ -3,7 +3,7 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
 import { Documents } from '/imports/lib/collections';
 
-import { rateLimit } from '../libs/rate-limit.js';
+import rateLimit from '../libs/rate-limit.js';
 
 export const insertDocument = new ValidatedMethod({
   name: 'documents.insert',

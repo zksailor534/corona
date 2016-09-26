@@ -14,6 +14,9 @@ import RecoverPassword from './containers/recover-password';
 import ResetPassword from './containers/reset-password';
 import Signup from './containers/signup';
 
+// Admin Components
+import Users from '../admin/containers/users';
+
 // Documents Components
 import Documents from '../documents/components/documents';
 
@@ -35,6 +38,7 @@ export default function (injectDeps, { Meteor, Store }) {
       <Router history={history}>
         <Route path="/" component={LayoutCtx}>
           <IndexRoute component={HomePage} onEnter={ requireAuth } />
+          <Route name="admin" path="/admin" component={ Users } onEnter={ requireAuth } />
           <Route
             name="documents"
             path="/documents"

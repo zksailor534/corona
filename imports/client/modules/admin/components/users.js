@@ -17,6 +17,8 @@ const Users = (props) => {
           <table className='table table-bordered'>
             <thead>
               <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th>Email Address</th>
                 <th className='text-center'>Role</th>
               </tr>
@@ -33,11 +35,7 @@ const Users = (props) => {
 
 Users.propTypes = {
   handleSubmit: React.PropTypes.func,
-  pristine: React.PropTypes.bool,
-  reset: React.PropTypes.func,
-  submitting: React.PropTypes.bool,
-  invalid: React.PropTypes.bool,
-  users: React.PropTypes.object,
+  users: React.PropTypes.array,
   initialValues: React.PropTypes.object,
 };
 

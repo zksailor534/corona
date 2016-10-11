@@ -1,6 +1,6 @@
 ## Mantra Base
----
-#### Version 0.2.0
+
+#### Version 0.2.1
 
 A Meteor application boilerplate that combines two separate boilerplates and applies
  the principles of the Mantra architecture. Still very much a work in progress,

@@ -1,6 +1,6 @@
 ## Mantra Base
 
-#### Version 0.2.1
+#### Version 0.2.2
 
 A Meteor application boilerplate that combines two separate boilerplates and applies
  the principles of the Mantra architecture. Still very much a work in progress,
@@ -23,11 +23,14 @@ A Meteor application boilerplate that combines two separate boilerplates and app
 
 ### Future Tasks
 
-- [ ] Configure tests
+- [ ] Configure client-side unit tests
+- [x] Configure server-side unit tests
+- [ ] Configure integration tests
 - [x] Form validation for core
 - [x] Redux state for core
 - [ ] Form validation for documents
 - [ ] Redux state for documents
+- [ ] Modularize React Router
 
 ### Feedback
 

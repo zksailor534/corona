@@ -24,4 +24,6 @@ aldeed:collection2            # Automatic validation of insert and update operat
 mdg:validated-method          # A simple wrapper for Meteor.methods
 
 themeteorchef:bert            # A client side, multi-style alerts system for Meteor.
+xolvio:cleaner                # Methods to clear your Mongo database and collections for testing purposes
+practicalmeteor:mocha         # Write meteor package tests with mocha and run them in the browser
 dburles:factory               # Factories for Meteor

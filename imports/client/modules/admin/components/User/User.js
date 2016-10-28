@@ -2,7 +2,7 @@ import React from 'react';
 
 import './User.css';
 
-const User = ({ user, changeRole, role }) => {
+const User = ({ user, changeRole, role, currentUser }) => {
   const id = user._id;
   const firstName = user.profile.name.first;
   const lastName = user.profile.name.last;
@@ -15,7 +15,9 @@ const User = ({ user, changeRole, role }) => {
   return (
     <tr className='user-table'>
       <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>
-        <input type='checkbox' aria-label={`${id}-checkbox`} />
+        {currentUser ?
+          <label className='label label-success'>You!</label> :
+          <input type='checkbox' aria-label={`${id}-checkbox`} />}
       </td>
       <td style={{ verticalAlign: 'middle' }}>
         {firstName}
@@ -46,6 +48,7 @@ User.propTypes = {
   user: React.PropTypes.object,
   role: React.PropTypes.string,
   changeRole: React.PropTypes.func,
+  currentUser: React.PropTypes.bool,
 };
 
 export default User;

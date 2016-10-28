@@ -8,7 +8,7 @@ import User from '../User';
 import './UserList.css';
 
 const UserList = (props) => {
-  const { changeRole, users } = props;
+  const { changeRole, users, currentUser } = props;
 
   const listUsers = () => {
     let role = 'user';
@@ -24,6 +24,7 @@ const UserList = (props) => {
           user={u}
           role={role}
           changeRole={changeRole}
+          currentUser={u._id === currentUser}
         />
       );
     });
@@ -70,6 +71,7 @@ const UserList = (props) => {
 UserList.propTypes = {
   changeRole: React.PropTypes.func,
   users: React.PropTypes.array,
+  currentUser: React.PropTypes.string,
   dirty: React.PropTypes.bool,
   submitting: React.PropTypes.bool,
 };

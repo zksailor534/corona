@@ -2,6 +2,7 @@ import faker from 'faker';
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
+import { Random } from 'meteor/random';
 
 const Invitations = new Mongo.Collection('Invitations');
 
@@ -31,7 +32,7 @@ Invitations.schema = new SimpleSchema({
     label: 'Role to apply to the user.',
   },
   date: {
-    type: String,
+    type: Date,
     label: 'Invitation Date',
   },
 });
@@ -40,7 +41,7 @@ Invitations.attachSchema(Invitations.schema);
 
 Factory.define('invitation', Invitations, {
   email: () => faker.internet.email(),
-  token: () => `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+  token: () => Random.hexString(16),
   role: 'user',
   date: () => faker.date.recent(30),
 });

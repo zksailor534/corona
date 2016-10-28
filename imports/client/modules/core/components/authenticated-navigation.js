@@ -7,6 +7,10 @@ const userName = (user) => {
   return user ? `${name.first} ${name.last}` : '';
 };
 
+const adminUser = (user) => (
+  user.roles.indexOf('admin') !== -1
+);
+
 const AuthenticatedNavigation = ({ submitLogout, user }) => (
   <div>
     <Nav>
@@ -19,7 +23,10 @@ const AuthenticatedNavigation = ({ submitLogout, user }) => (
     </Nav>
     <Nav pullRight>
       <NavDropdown eventKey={ 3 } title={ userName(user) } id="basic-nav-dropdown">
-        <MenuItem eventKey={ 3.1 } onClick={ () => submitLogout() }>Logout</MenuItem>
+        {adminUser(user) && (<LinkContainer to="/admin">
+          <MenuItem eventKey={ 3.1 } >Admin</MenuItem>
+        </LinkContainer>)}
+        <MenuItem eventKey={ 3.2 } onClick={ () => submitLogout() }>Logout</MenuItem>
       </NavDropdown>
     </Nav>
   </div>

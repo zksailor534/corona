@@ -7,7 +7,7 @@ import {
 import './InvitationList.css';
 
 const InvitationList = (props) => {
-  const { invitations } = props;
+  const { invitations, toggleModal } = props;
 
   const listInvites = () => (
     invitations.map((i) => (
@@ -24,7 +24,7 @@ const InvitationList = (props) => {
       <div className='page-header clearfix'>
         <h4 className='pull-left'>Invitations</h4>
         <div className='pull-right'>
-          <Button disabled>Send Invitation</Button>
+          <Button onClick={toggleModal}>Send Invitation</Button>
         </div>
       </div>
       {invitations.length > 0 ?
@@ -49,6 +49,7 @@ const InvitationList = (props) => {
 
 InvitationList.propTypes = {
   invitations: React.PropTypes.array,
+  toggleModal: React.PropTypes.func,
 };
 
 export default InvitationList;

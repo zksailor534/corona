@@ -20,6 +20,7 @@ const initialAdminState = {
 const initialUserState = {
   isChanging: false,
   error: false,
+  inviteModal: false,
 };
 
 const user = (state = initialUserState, action) => {
@@ -74,6 +75,14 @@ export default (state = initialAdminState, action) => {
       return Object.assign({}, state, {
         users: users(state.users, action),
         isChanging: false,
+      });
+    case 'OPEN_INVITE_MODAL':
+      return Object.assign({}, state, {
+        inviteModal: true,
+      });
+    case 'CLOSE_INVITE_MODAL':
+      return Object.assign({}, state, {
+        inviteModal: false,
       });
     default:
       return state;

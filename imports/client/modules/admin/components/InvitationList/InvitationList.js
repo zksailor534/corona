@@ -4,18 +4,20 @@ import {
   Button,
 } from 'react-bootstrap';
 
+import Invite from '../Invite';
 import './InvitationList.css';
 
 const InvitationList = (props) => {
-  const { invitations, toggleModal } = props;
+  const { invitations, openModal } = props;
 
   const listInvites = () => (
     invitations.map((i) => (
-      <tr>
-        <td>{i.email}</td>
-        <td>{i.role}</td>
-        <td>{i.date}</td>
-      </tr>
+      <Invite
+        key={i.token}
+        email={i.email}
+        role={i.role}
+        date={i.date.toString()}
+      />
     ))
   );
 
@@ -24,7 +26,7 @@ const InvitationList = (props) => {
       <div className='page-header clearfix'>
         <h4 className='pull-left'>Invitations</h4>
         <div className='pull-right'>
-          <Button onClick={toggleModal}>Send Invitation</Button>
+          <Button onClick={openModal}>New Invitation</Button>
         </div>
       </div>
       {invitations.length > 0 ?
@@ -32,9 +34,10 @@ const InvitationList = (props) => {
           <table className='table table-hover'>
             <thead>
               <tr>
-                <th style={({ width: '40%' })} >Email Address</th>
-                <th style={({ width: '30%' })} >Role</th>
-                <th style={({ width: '30%' })} >Date</th>
+                <th style={({ width: '25%' })} >Email Address</th>
+                <th style={({ width: '25%' })} >Role</th>
+                <th style={({ width: '40%' })} >Date</th>
+                <th style={({ width: '10%' })} ></th>
               </tr>
             </thead>
             <tbody>
@@ -49,7 +52,7 @@ const InvitationList = (props) => {
 
 InvitationList.propTypes = {
   invitations: React.PropTypes.array,
-  toggleModal: React.PropTypes.func,
+  openModal: React.PropTypes.func,
 };
 
 export default InvitationList;

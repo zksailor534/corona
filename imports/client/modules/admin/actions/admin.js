@@ -1,3 +1,5 @@
+import { Random } from 'meteor/random';
+
 // ! ------------------------------------------
 // Redux action creators
 // ! ------------------------------------------
@@ -16,10 +18,24 @@ const roleChangeSuccess = (id) => ({
   id,
 });
 
+const openInvite = () => ({
+  type: 'OPEN_INVITE_MODAL',
+});
+
+const closeInvite = () => ({
+  type: 'CLOSE_INVITE_MODAL',
+});
+
 export default {
-// ! ------------------------------------------
-// Change User Role
-// ! ------------------------------------------
+  // ! ------------------------------------------
+  // Expose bound redux actions
+  // ! ------------------------------------------
+  openInviteModal({ Store }) { Store.dispatch(openInvite()); },
+  closeInviteModal({ Store }) { Store.dispatch(closeInvite()); },
+
+  // ! ------------------------------------------
+  // Change User Role
+  // ! ------------------------------------------
   changeRole({ Meteor, Store, Bert }, id, role) {
     const { dispatch } = Store;
 
@@ -41,6 +57,32 @@ export default {
           Bert.alert('Role changed!', 'success');
           // Change state to successful login
           dispatch(roleChangeSuccess(id));
+        }
+      }
+    );
+  },
+
+  // ! ------------------------------------------
+  // Send User Invite
+  // ! ------------------------------------------
+  sendInvite({ Meteor, Bert }, { email, role }) {
+    // Generate invite token and date
+    const token = Random.hexString(16);
+    const date = new Date();
+
+    // Call send invitation method
+    Meteor.call(
+      'invitations.send',
+      {
+        email,
+        token,
+        role: role.value,
+        date,
+      }, (error) => {
+        if (error) {
+          Bert.alert(error.reason, 'danger');
+        } else {
+          Bert.alert('Role changed!', 'success');
         }
       }
     );

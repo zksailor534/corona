@@ -14,6 +14,7 @@ const composer = ({ context }, onData) => {
 };
 
 const depsMapper = (context, actions) => ({
+  openModal: actions.admin.openInviteModal,
   context: () => context,
 });
 

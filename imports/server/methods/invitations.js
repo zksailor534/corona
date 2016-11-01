@@ -18,10 +18,21 @@ export const sendInvitation = new ValidatedMethod({
   },
 });
 
+export const removeInvitation = new ValidatedMethod({
+  name: 'invitations.remove',
+  validate: new SimpleSchema({
+    token: { type: String },
+  }).validator(),
+  run(invite) {
+    Invitations.remove({ token: invite.token });
+  },
+});
+
 export default function () {
   rateLimit({
     methods: [
       sendInvitation,
+      removeInvitation,
     ],
     limit: 5,
     timeRange: 1000,

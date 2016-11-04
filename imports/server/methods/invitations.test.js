@@ -28,9 +28,7 @@ describe('Invitations methods', () => {
 
   it('removes an invitation from the Invitations collection', () => {
     const { email, role, token, date } = Factory.create('invitation');
-    sendInvitation.call(
-      { email, role, token, date }
-    );
+    Invitations.insert({ email, role, token, date });
     const getInviteAdd = Invitations.findOne({ token });
     expect(getInviteAdd.token).to.equal(token); // Ensure invite is there
 

@@ -87,4 +87,23 @@ export default {
       }
     );
   },
+
+  // ! ------------------------------------------
+  // Remove User Invite
+  // ! ------------------------------------------
+  removeInvite({ Meteor, Bert }, { token }) {
+    // Call remove invitation method
+    Meteor.call(
+      'invitations.remove',
+      {
+        token,
+      }, (error) => {
+        if (error) {
+          Bert.alert(error.reason, 'danger');
+        } else {
+          Bert.alert('Invite removed!', 'success');
+        }
+      }
+    );
+  },
 };

@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 
 import './Invite.css';
 
-const Invite = ({ email, role, date }) => (
+const Invite = ({ email, token, role, date, removeInvite }) => (
   <tr className='user-table'>
     <td style={{ verticalAlign: 'middle' }}>
       {email}
@@ -15,16 +15,17 @@ const Invite = ({ email, role, date }) => (
       {date}
     </td>
     <td style={{ verticalAlign: 'middle' }}>
-      <Button>Remove</Button>
+      <Button onClick={() => removeInvite({ token })}>Remove</Button>
     </td>
   </tr>
 );
 
 Invite.propTypes = {
   email: React.PropTypes.string,
+  token: React.PropTypes.string,
   role: React.PropTypes.string,
   date: React.PropTypes.string,
-  deleteInvite: React.PropTypes.func,
+  removeInvite: React.PropTypes.func,
 };
 
 export default Invite;

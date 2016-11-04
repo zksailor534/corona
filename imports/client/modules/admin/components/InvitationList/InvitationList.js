@@ -5,18 +5,19 @@ import {
 } from 'react-bootstrap';
 
 import Invite from '../Invite';
-import './InvitationList.css';
 
 const InvitationList = (props) => {
-  const { invitations, openModal } = props;
+  const { invitations, removeInvite, openModal } = props;
 
   const listInvites = () => (
     invitations.map((i) => (
       <Invite
         key={i.token}
         email={i.email}
+        token={i.token}
         role={i.role}
         date={i.date.toString()}
+        removeInvite={removeInvite}
       />
     ))
   );
@@ -52,6 +53,7 @@ const InvitationList = (props) => {
 
 InvitationList.propTypes = {
   invitations: React.PropTypes.array,
+  removeInvite: React.PropTypes.func,
   openModal: React.PropTypes.func,
 };
 

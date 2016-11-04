@@ -15,7 +15,7 @@ describe('Invitations methods', () => {
     }
   });
 
-  it('inserts an invitation into the Invitations collection', () => {
+  it('inserts and sends an invitation in the Invitations collection', () => {
     const { email, role, token, date } = Factory.create('invitation');
     sendInvitation.call(
       { email, role, token, date }

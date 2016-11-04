@@ -29,3 +29,5 @@ practicalmeteor:mocha         # Write meteor package tests with mocha and run th
 dburles:factory               # Factories for Meteor
 shell-server                  # Server-side component of the `meteor shell` command.
 random                        # Random number generator and utilities
+email                         # Send email messages
+meteorhacks:ssr

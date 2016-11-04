@@ -1,0 +1,6 @@
+{
+  "private": {
+    "MAIL_URL": "",
+    "domain": "localhost:3000"
+  }
+}

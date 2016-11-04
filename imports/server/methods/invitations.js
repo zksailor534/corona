@@ -1,9 +1,32 @@
+import { Meteor } from 'meteor/meteor';
+import { Email } from 'meteor/email';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
+import { SSR } from 'meteor/meteorhacks:ssr';
 
 import { Invitations } from '/imports/lib/collections';
 
 import rateLimit from '../libs/rate-limit.js';
+
+// eslint-disable-next-line no-underscore-dangle
+const _prepareEmail = (token) => {
+  const domain = Meteor.settings.private.domain;
+  const url = `http://${domain}/invite/${token}`;
+
+  // eslint-disable-next-line no-undef
+  SSR.compileTemplate('invitation', Assets.getText('email/templates/invitation.html'));
+  return SSR.render('invitation', { url });
+};
+
+// eslint-disable-next-line no-underscore-dangle
+const _sendInvitation = (email, content) => {
+  Email.send({
+    to: email,
+    from: 'Jan Bananasmith <jan@banana.co>',
+    subject: 'Invitation to Banana Co.',
+    html: content,
+  });
+};
 
 export const sendInvitation = new ValidatedMethod({
   name: 'invitations.send',
@@ -14,7 +37,9 @@ export const sendInvitation = new ValidatedMethod({
     date: { type: Date },
   }).validator(),
   run(invite) {
-    Invitations.insert(invite);
+    if (!Invitations.findOne({ token: invite.token })) Invitations.insert(invite);
+    const email = _prepareEmail(invite.token);
+    _sendInvitation(invite.email, email);
   },
 });
 

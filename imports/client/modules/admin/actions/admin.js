@@ -65,7 +65,9 @@ export default {
   // ! ------------------------------------------
   // Send User Invite
   // ! ------------------------------------------
-  sendInvite({ Meteor, Bert }, { email, role }) {
+  sendInvite({ Meteor, Store, Bert }, { email, role }) {
+    const { dispatch } = Store;
+
     // Generate invite token and date
     const token = Random.hexString(16);
     const date = new Date();
@@ -82,7 +84,8 @@ export default {
         if (error) {
           Bert.alert(error.reason, 'danger');
         } else {
-          Bert.alert('Role changed!', 'success');
+          Bert.alert('Invite sent!', 'success');
+          dispatch(closeInvite());
         }
       }
     );

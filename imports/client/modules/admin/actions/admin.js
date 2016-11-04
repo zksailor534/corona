@@ -18,6 +18,21 @@ const roleChangeSuccess = (id) => ({
   id,
 });
 
+const removeUserRequest = (id) => ({
+  type: 'REMOVE_USER_REQUEST',
+  id,
+});
+
+const removeUserError = (id) => ({
+  type: 'REMOVE_USER_ERROR',
+  id,
+});
+
+const removeUserSuccess = (id) => ({
+  type: 'REMOVE_USER_SUCCESS',
+  id,
+});
+
 const openInvite = () => ({
   type: 'OPEN_INVITE_MODAL',
 });
@@ -57,6 +72,35 @@ export default {
           Bert.alert('Role changed!', 'success');
           // Change state to successful login
           dispatch(roleChangeSuccess(id));
+        }
+      }
+    );
+  },
+
+  // ! ------------------------------------------
+  // Remove User
+  // ! ------------------------------------------
+  removeUser({ Meteor, Store, Bert }, id) {
+    const { dispatch } = Store;
+
+    // Change state to remove user request
+    dispatch(removeUserRequest(id));
+
+    // Call remove user method
+    Meteor.call(
+      'user.remove',
+      {
+        id,
+        requestingUser: Meteor.userId(),
+      }, (error) => {
+        if (error) {
+          Bert.alert(error.reason, 'danger');
+          // Change state to remove user error
+          dispatch(removeUserError(id));
+        } else {
+          Bert.alert('User Removed!', 'success');
+          // Change state to successful login
+          dispatch(removeUserSuccess(id));
         }
       }
     );

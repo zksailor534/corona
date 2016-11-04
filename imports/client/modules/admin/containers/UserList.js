@@ -19,6 +19,7 @@ const mapStateToProps = ({ accounts }) => ({
 
 const depsMapper = (context, actions) => ({
   changeRole: actions.admin.changeRole,
+  removeUser: actions.admin.removeUser,
   context: () => context,
 });
 

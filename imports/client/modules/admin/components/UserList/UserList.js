@@ -1,14 +1,11 @@
 import React from 'react';
 import {
   Alert,
-  Button,
 } from 'react-bootstrap';
 import User from '../User';
 
-import './UserList.css';
-
 const UserList = (props) => {
-  const { changeRole, users, currentUser } = props;
+  const { changeRole, users, currentUser, removeUser } = props;
 
   const listUsers = () => {
     let role = 'user';
@@ -25,6 +22,7 @@ const UserList = (props) => {
           role={role}
           changeRole={changeRole}
           currentUser={u._id === currentUser}
+          removeUser={removeUser}
         />
       );
     });
@@ -34,28 +32,17 @@ const UserList = (props) => {
     <div>
       <div className='page-header clearfix'>
         <h4 className='pull-left'>Users</h4>
-        <div className='pull-right'>
-          <Button className='btn-spaced' disabled>Save</Button>
-          <Button disabled>Remove</Button>
-        </div>
       </div>
       {users.length > 0 ?
         <div className='table-responsive'>
           <table className='table table-hover'>
-            <colgroup>
-              <col style={({ width: '5%' })} />
-              <col style={({ width: '20%' })} />
-              <col style={({ width: '20%' })} />
-              <col style={({ width: '25%' })} />
-              <col style={({ width: '30%' })} />
-            </colgroup>
             <thead>
               <tr>
-                <th style={({ width: '5%' })} ></th>
+                <th style={({ width: '25%' })} >Email Address</th>
                 <th style={({ width: '20%' })} >First Name</th>
                 <th style={({ width: '20%' })} >Last Name</th>
-                <th style={({ width: '25%' })} >Email Address</th>
-                <th style={({ width: '30%' })} >Role</th>
+                <th style={({ width: '25%' })} >Role</th>
+                <th style={({ width: '10%' })} ></th>
               </tr>
             </thead>
             <tbody>
@@ -70,6 +57,7 @@ const UserList = (props) => {
 
 UserList.propTypes = {
   changeRole: React.PropTypes.func,
+  removeUser: React.PropTypes.func,
   users: React.PropTypes.array,
   currentUser: React.PropTypes.string,
   dirty: React.PropTypes.bool,

@@ -24,7 +24,6 @@ export const removeUser = new ValidatedMethod({
   }).validator(),
   run(options) {
     if (Roles.userIsInRole(options.requestingUser, 'admin')) {
-      console.log('removing user');
       Meteor.users.remove({ _id: options.id });
     }
   },

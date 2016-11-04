@@ -4,7 +4,7 @@
   "description": "Application description.",
   "scripts": {
     "start": "meteor --settings settings-development.json",
-    "test": "meteor test --driver-package practicalmeteor:mocha --port 5000",
+    "test": "meteor test --driver-package practicalmeteor:mocha --port 5000 --settings settings-development.json",
     "lintfix": "eslint . --fix --ext .js --ignore-path .gitignore",
     "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests",
     "chimp-test": "chimp --ddp=http://localhost:3000 --mocha --path=tests",

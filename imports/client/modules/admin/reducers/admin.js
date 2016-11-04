@@ -26,11 +26,13 @@ const initialUserState = {
 const user = (state = initialUserState, action) => {
   switch (action.type) {
     case 'ROLE_CHANGE_REQUEST':
+    case 'REMOVE_USER_REQUEST':
       return Object.assign({}, state, {
         isChanging: false,
         error: false,
       });
     case 'ROLE_CHANGE_ERROR':
+    case 'REMOVE_USER_ERROR':
       return Object.assign({}, state, {
         isChanging: false,
         error: true,
@@ -51,9 +53,16 @@ const users = (state = {}, action) => {
     case 'ROLE_CHANGE_REQUEST':
     case 'ROLE_CHANGE_ERROR':
     case 'ROLE_CHANGE_SUCCESS':
+    case 'REMOVE_USER_REQUEST':
+    case 'REMOVE_USER_ERROR':
       return Object.assign({}, state, {
         [action.id]: user(state.id, action),
       });
+    case 'REMOVE_USER_SUCCESS': {
+      const newState = state;
+      delete newState[action.id];
+      return newState;
+    }
     default:
       return state;
   }
@@ -62,16 +71,15 @@ const users = (state = {}, action) => {
 export default (state = initialAdminState, action) => {
   switch (action.type) {
     case 'ROLE_CHANGE_REQUEST':
+    case 'REMOVE_USER_REQUEST':
       return Object.assign({}, state, {
         users: users(state.users, action),
         isChanging: true,
       });
     case 'ROLE_CHANGE_ERROR':
-      return Object.assign({}, state, {
-        users: users(state.users, action),
-        isChanging: false,
-      });
     case 'ROLE_CHANGE_SUCCESS':
+    case 'REMOVE_USER_ERROR':
+    case 'REMOVE_USER_SUCCESS':
       return Object.assign({}, state, {
         users: users(state.users, action),
         isChanging: false,

@@ -22,8 +22,8 @@ const _prepareEmail = (token) => {
 const _sendInvitation = (email, content) => {
   Email.send({
     to: email,
-    from: 'Jan Bananasmith <jan@banana.co>',
-    subject: 'Invitation to Banana Co.',
+    from: Meteor.settings.private.siteAdmin,
+    subject: `Invitation to ${Meteor.settings.private.siteName}`,
     html: content,
   });
 };

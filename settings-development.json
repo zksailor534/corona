@@ -1,6 +1,8 @@
 {
   "private": {
     "MAIL_URL": "",
-    "domain": "localhost:3000"
+    "domain": "localhost:3000",
+    "siteName": "Mantra Base",
+    "siteAdmin": "Mantra Admin <admin@mantra.com>"
   }
 }

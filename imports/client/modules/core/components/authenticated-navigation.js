@@ -1,15 +1,12 @@
 import React from 'react';
 import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 import { Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Roles } from 'meteor/alanning:roles';
 
 const userName = (user) => {
   const name = user && user.profile ? user.profile.name : '';
   return user ? `${name.first} ${name.last}` : '';
 };
-
-const adminUser = (user) => (
-  user.roles.indexOf('admin') !== -1
-);
 
 const AuthenticatedNavigation = ({ submitLogout, user }) => (
   <div>
@@ -23,7 +20,7 @@ const AuthenticatedNavigation = ({ submitLogout, user }) => (
     </Nav>
     <Nav pullRight>
       <NavDropdown eventKey={ 3 } title={ userName(user) } id="basic-nav-dropdown">
-        {adminUser(user) && (<LinkContainer to="/admin">
+        {Roles.userIsInRole(user._id, 'admin') && (<LinkContainer to="/admin">
           <MenuItem eventKey={ 3.1 } >Admin</MenuItem>
         </LinkContainer>)}
         <MenuItem eventKey={ 3.2 } onClick={ () => submitLogout() }>Logout</MenuItem>

@@ -28,18 +28,22 @@ const _sendInvitation = (email, content) => {
   });
 };
 
-export const sendInvitation = new ValidatedMethod({
-  name: 'invitations.send',
+export const addInvitation = new ValidatedMethod({
+  name: 'invitations.add',
   validate: new SimpleSchema({
     email: { type: String },
     token: { type: String },
     role: { type: String },
     date: { type: Date },
+    send: { type: Boolean, defaultValue: true, optional: true },
   }).validator(),
   run(invite) {
     if (!Invitations.findOne({ token: invite.token })) Invitations.insert(invite);
-    const email = _prepareEmail(invite.token);
-    _sendInvitation(invite.email, email);
+    console.log(invite.send);
+    if (invite.send) {
+      const email = _prepareEmail(invite.token);
+      _sendInvitation(invite.email, email);
+    }
   },
 });
 
@@ -56,7 +60,7 @@ export const removeInvitation = new ValidatedMethod({
 export default function () {
   rateLimit({
     methods: [
-      sendInvitation,
+      addInvitation,
       removeInvitation,
     ],
     limit: 5,

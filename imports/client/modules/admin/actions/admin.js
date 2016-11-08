@@ -1,8 +1,22 @@
+import { browserHistory } from 'react-router';
 import { Random } from 'meteor/random';
 
 // ! ------------------------------------------
 // Redux action creators
 // ! ------------------------------------------
+const requestSignup = () => ({
+  type: 'SIGNUP_REQUEST',
+});
+
+const receiveSignup = (user) => ({
+  type: 'SIGNUP_SUCCESS',
+  user,
+});
+
+const signupError = () => ({
+  type: 'SIGNUP_FAILURE',
+});
+
 const roleChangeRequest = (id) => ({
   type: 'ROLE_CHANGE_REQUEST',
   id,
@@ -47,6 +61,50 @@ export default {
   // ! ------------------------------------------
   openInviteModal({ Store }) { Store.dispatch(openInvite()); },
   closeInviteModal({ Store }) { Store.dispatch(closeInvite()); },
+
+  // ! ------------------------------------------
+  // Signup from Invite
+  // ! ------------------------------------------
+  signupFromInvite({ Meteor, Store, Bert }, props) {
+    const { dispatch } = Store;
+    const { email, passwordCreate, firstName, lastName, token, role } = props;
+
+    // Change state to signup request
+    dispatch(requestSignup());
+
+    const user = {
+      email,
+      password: passwordCreate,
+      profile: {
+        name: {
+          first: firstName,
+          last: lastName,
+        },
+      },
+      roles: [role],
+      token,
+    };
+
+    Meteor.call(
+      'user.add',
+      user, (error, response) => {
+        if (error) {
+          Bert.alert(error.reason, 'danger');
+          // Change state to signup error
+          dispatch(signupError());
+        } else {
+          // Change state to successful login
+          dispatch(receiveSignup(response));
+
+          // Announce success
+          Bert.alert(`Welcome ${firstName}!`, 'success');
+
+          // Redirect to home screen
+          browserHistory.push('/');
+        }
+      }
+    );
+  },
 
   // ! ------------------------------------------
   // Change User Role
@@ -118,12 +176,13 @@ export default {
 
     // Call send invitation method
     Meteor.call(
-      'invitations.send',
+      'invitations.add',
       {
         email,
         token,
         role: role.value,
         date,
+        send: true,
       }, (error) => {
         if (error) {
           Bert.alert(error.reason, 'danger');

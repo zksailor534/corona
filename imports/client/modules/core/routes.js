@@ -16,6 +16,7 @@ import Signup from './containers/signup';
 
 // Admin Components
 import AdminPage from '../admin/components/AdminPage';
+import AcceptInvitation from '../admin/containers/AcceptInvitation';
 
 // Documents Components
 import Documents from '../documents/components/documents';
@@ -41,6 +42,7 @@ export default function (injectDeps, { Store }) {
         <Route path="/" component={LayoutCtx}>
           <IndexRoute component={HomePage} onEnter={ requireAuth } />
           <Route name="admin" path="/admin" component={ AdminPage } onEnter={ requireAuth } />
+          <Route name="accept-invitation" path="/invite/:token" component={ AcceptInvitation } />
           <Route
             name="documents"
             path="/documents"

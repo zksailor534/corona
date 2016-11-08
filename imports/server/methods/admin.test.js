@@ -8,18 +8,27 @@ import { Roles } from 'meteor/alanning:roles';
 import { expect } from 'meteor/practicalmeteor:chai';
 import { resetDatabase } from 'meteor/xolvio:cleaner';
 
-import { setRoleOnUser, removeUser } from './admin';
+import { Invitations } from '/imports/lib/collections';
+import { setRoleOnUser, addUser, removeUser } from './admin';
 
 const fakeUser = () => ({
   email: faker.internet.email(),
-  password: 'ksd8jsdn3od8',
+  password: faker.internet.password(),
   profile: {
     name: {
       first: faker.name.firstName(),
       last: faker.name.lastName(),
     },
   },
+  roles: ['user'],
 });
+
+const fakeInvite = {
+  email: faker.internet.email(),
+  token: '90bfca72ff345a71',
+  role: 'admin',
+  date: new Date(),
+};
 
 let userOne = {};
 let userTwo = {};
@@ -36,19 +45,41 @@ describe('Admin methods', () => {
     Accounts.createUser(fakeUser());
     userTwo = Meteor.users.findOne({ _id: { $ne: userOne._id } });
     Roles.setUserRoles(userTwo._id, ['user']);
+
+    // Create an invitation
+    Invitations.insert(fakeInvite);
+  });
+
+  it('creates a user without an invite', () => {
+    const user = fakeUser();
+    addUser.call(user);
+    const getUser = Accounts.findUserByEmail(user.email);
+    // eslint-disable-next-line no-unused-expressions
+    expect(getUser).to.exist;
+  });
+
+  it('creates a user with an invite', () => {
+    const user = fakeUser();
+    addUser.call(Object.assign({}, user, { token: fakeInvite.token }));
+    const getUser = Accounts.findUserByEmail(user.email);
+    const getInvite = Invitations.findOne({ token: fakeInvite.token });
+    // eslint-disable-next-line no-unused-expressions
+    expect(getUser).to.exist;
+    // eslint-disable-next-line no-unused-expressions
+    expect(getInvite).to.be.undefined;
   });
 
   it('changes a user role', () => {
     const newRole = 'manager';
-    const getUserOld = Meteor.users.findOne({ _id: userTwo._id });
-    expect(getUserOld.roles[0]).to.not.equal(newRole);
+    // eslint-disable-next-line no-unused-expressions
+    expect(Roles.userIsInRole(userTwo._id, [newRole])).to.be.false;
 
     // Change role
     setRoleOnUser.call(
       { id: userTwo._id, role: newRole }
     );
-    const getUserNew = Meteor.users.findOne({ _id: userTwo._id });
-    expect(getUserNew.roles[0]).to.equal(newRole);
+    // eslint-disable-next-line no-unused-expressions
+    expect(Roles.userIsInRole(userTwo._id, [newRole])).to.be.tru;
   });
 
   it('does not allow a non-admin to remove a user', () => {

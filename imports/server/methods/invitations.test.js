@@ -6,19 +6,13 @@ import { expect } from 'meteor/practicalmeteor:chai';
 import { resetDatabase } from 'meteor/xolvio:cleaner';
 import { Factory } from 'meteor/dburles:factory';
 import { Invitations } from '/imports/lib/collections';
-import { sendInvitation, removeInvitation } from './invitations';
+import { addInvitation, removeInvitation } from './invitations';
 
 describe('Invitations methods', () => {
-  beforeEach(function () {
-    if (Meteor.isServer) {
-      resetDatabase();
-    }
-  });
-
-  it('inserts and sends an invitation in the Invitations collection', () => {
+  it('inserts an invitation in the Invitations collection', () => {
     const { email, role, token, date } = Factory.create('invitation');
-    sendInvitation.call(
-      { email, role, token, date }
+    addInvitation.call(
+      { email, role, token, date, send: false }
     );
     const getInvite = Invitations.findOne({ email });
     expect(getInvite.email).to.equal(email);
@@ -35,5 +29,12 @@ describe('Invitations methods', () => {
     removeInvitation.call({ token });
     const getInviteRem = Invitations.findOne({ token });
     expect(getInviteRem).to.equal(undefined); // Invitation has been removed
+  });
+
+  after(function () {
+    // Clean up
+    if (Meteor.isServer) {
+      resetDatabase();
+    }
   });
 });

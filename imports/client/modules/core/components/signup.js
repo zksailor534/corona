@@ -7,7 +7,12 @@ import { inputField, passwordField } from './form-fields';
 const Signup = (props) => {
   const { handleSubmit, pristine, submitting, invalid } = props;
   return (
-    <Col xs={ 12 } sm={ 8 } md={ 6 } lg={ 6 }>
+    <Col
+      xs={ 12 }
+      sm={ 8 } smOffset={ 2 }
+      md={ 6 } mdOffset={ 3 }
+      lg={ 6 } lgOffset={ 3 }
+    >
       <h4 className='page-header'>Sign Up</h4>
       <Form onSubmit={handleSubmit}>
         <Row>

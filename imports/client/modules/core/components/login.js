@@ -7,7 +7,12 @@ import { inputField } from './form-fields';
 const Login = (props) => {
   const { handleSubmit, pristine, submitting, invalid } = props;
   return (
-    <Col xs={ 12 } sm={ 8 } md={ 6 } lg={ 6 }>
+    <Col
+      xs={ 12 }
+      sm={ 8 } smOffset={ 2 }
+      md={ 6 } mdOffset={ 3 }
+      lg={ 6 } lgOffset={ 3 }
+    >
       <h4 className='page-header'>Login</h4>
       <Form onSubmit={handleSubmit}>
         <Field name='email' type='text' component={inputField} label='Email Address'/>

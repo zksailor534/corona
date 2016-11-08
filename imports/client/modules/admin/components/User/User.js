@@ -10,7 +10,7 @@ const User = ({ user, changeRole, role, currentUser, removeUser }) => {
   const email = user.emails[0].address;
 
   const handleRoleChange = (e) => {
-    changeRole(e.target.id.replace(/.*-/, ''), e.target.value);
+    changeRole(id, e.target.value);
   };
 
   const hideButton = () => {
@@ -37,7 +37,7 @@ const User = ({ user, changeRole, role, currentUser, removeUser }) => {
       </td>
       <td style={{ verticalAlign: 'middle' }}>
         <select
-          id={`role-${id}`}
+          name={`role-${id}`}
           defaultValue={role}
           className='form-control'
           onChange={handleRoleChange}

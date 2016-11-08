@@ -4,14 +4,14 @@ import { Button } from 'react-bootstrap';
 import './Invite.css';
 
 const Invite = ({ email, token, role, date, removeInvite }) => (
-  <tr className='user-table'>
-    <td style={{ verticalAlign: 'middle' }}>
+  <tr id={token} className='user-table'>
+    <td id={`email-${token}`} style={{ verticalAlign: 'middle' }}>
       {email}
     </td>
-    <td style={{ verticalAlign: 'middle' }}>
+    <td id={`role-${token}`} style={{ verticalAlign: 'middle' }}>
       {role}
     </td>
-    <td style={{ verticalAlign: 'middle' }}>
+    <td id={`date-${token}`} style={{ verticalAlign: 'middle' }}>
       {date}
     </td>
     <td style={{ verticalAlign: 'middle' }}>

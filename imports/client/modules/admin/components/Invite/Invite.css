@@ -19,7 +19,14 @@
   aria-hidden: true;
 }
 
+.user-table button {
+  border: none;
+  background: transparent;
+  color: transparent;
+}
+
 .user-table button:hover {
+  display: inline-block;
   color: #fff;
   background-color: #c9302c;
   border-color: #ac2925;

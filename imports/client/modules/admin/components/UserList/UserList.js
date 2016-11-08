@@ -2,19 +2,15 @@ import React from 'react';
 import {
   Alert,
 } from 'react-bootstrap';
+import { Roles } from 'meteor/alanning:roles';
 import User from '../User';
 
 const UserList = (props) => {
   const { changeRole, users, currentUser, removeUser } = props;
 
-  const listUsers = () => {
-    let role = 'user';
-    return users.map((u) => {
-      if (u.roles) {
-        role = u.roles[0];
-      } else {
-        role = 'user';
-      }
+  const listUsers = () => (
+    users.map((u) => {
+      const role = Roles.getRolesForUser(u)[0]; // TODO allow multiple roles
       return (
         <User
           key={u._id}
@@ -25,8 +21,8 @@ const UserList = (props) => {
           removeUser={removeUser}
         />
       );
-    });
-  };
+    })
+  );
 
   return (
     <div>

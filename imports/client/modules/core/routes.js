@@ -20,12 +20,14 @@ import AdminPage from '../admin/components/AdminPage';
 // Documents Components
 import Documents from '../documents/components/documents';
 
-export default function (injectDeps, { Meteor, Store }) {
+export default function (injectDeps, { Store }) {
   const history = syncHistoryWithStore(browserHistory, Store);
   const LayoutCtx = injectDeps(Layout);
 
   const requireAuth = (nextState, replace) => {
-    if (!Meteor.loggingIn() && !Meteor.userId()) {
+    const loggingIn = Store.getState().accounts.isFetching;
+    const loggedIn = Store.getState().accounts.isAuthenticated;
+    if (!loggingIn && !loggedIn) {
       replace({
         pathname: '/login',
         state: { nextPathname: nextState.location.pathname },
@@ -38,7 +40,7 @@ export default function (injectDeps, { Meteor, Store }) {
       <Router history={history}>
         <Route path="/" component={LayoutCtx}>
           <IndexRoute component={HomePage} onEnter={ requireAuth } />
-          <Route name="admin" path="/admin" component={ AdminPage } />
+          <Route name="admin" path="/admin" component={ AdminPage } onEnter={ requireAuth } />
           <Route
             name="documents"
             path="/documents"

@@ -1,6 +1,7 @@
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
+import React from 'react';
+import Loading from 'react-loading';
 
-import Loading from '/imports/client/modules/core/components/loading.js';
 import DocumentsList from '../components/documents-list';
 
 export const composer = ({ context }, onData) => {
@@ -16,6 +17,6 @@ export const depsMapper = (context) => ({
 });
 
 export default composeAll(
-  composeWithTracker(composer, Loading),
+  composeWithTracker(composer, () => <Loading type='spokes' />),
   useDeps(depsMapper)
 )(DocumentsList);

@@ -26,7 +26,7 @@ const composer = ({ context, params }, onData) => {
 };
 
 const depsMapper = (context, actions) => ({
-  onSubmit: actions.admin.signupFromInvite,
+  onSubmit: actions.accounts.submitSignup,
   context: () => context,
 });
 

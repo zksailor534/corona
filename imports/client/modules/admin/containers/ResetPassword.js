@@ -1,14 +1,14 @@
 import { useDeps, composeAll } from 'mantra-core';
 import { reduxForm } from 'redux-form';
 
-import Login from '../components/login';
+import ResetPassword from '../components/ResetPassword';
 import validate from '../lib/validate-field';
 
 export const depsMapper = (context, actions) => ({
-  onSubmit: actions.accounts.submitLogin,
+  resetPassword: actions.accounts.resetPassword,
   context: () => context,
 });
 
 export default composeAll(
   useDeps(depsMapper)
-)(reduxForm({ form: 'login', validate })(Login));
+)(reduxForm({ form: 'signup', validate })(ResetPassword));

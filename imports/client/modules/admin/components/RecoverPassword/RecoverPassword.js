@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Col, Alert, Button } from 'react-bootstrap';
 import { Field } from 'redux-form';
-import { inputField } from './form-fields';
+import { inputField } from '../form-fields';
 
 const RecoverPassword = (props) => {
   const { handleSubmit, pristine, submitting, invalid } = props;

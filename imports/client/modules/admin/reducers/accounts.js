@@ -1,3 +1,17 @@
+// user state pattern
+// {
+//   users: {
+//     `${id}`: {
+//       firstName: string,
+//       lastName: string,
+//       email: string,
+//       role: string,
+//       isChanging: bool,
+//       error: bool,
+//     },
+//   },
+// }
+
 const initialState = {
   isFetching: false,
   isAuthenticated: false,

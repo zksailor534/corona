@@ -1,4 +1,4 @@
-// admin state pattern
+// user state pattern
 // {
 //   users: {
 //     `${id}`: {

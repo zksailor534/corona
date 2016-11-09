@@ -4,6 +4,26 @@ const validate = values => {
   const errors = {};
 
   // ! ------------------------------------------
+  // First Name (use inputField)
+  // ! ------------------------------------------
+  if (!values.firstName) {
+    errors.firtName = {
+      message: 'Required',
+      state: 'error',
+    };
+  }
+
+  // ! ------------------------------------------
+  // Last Name (use inputField)
+  // ! ------------------------------------------
+  if (!values.lastName) {
+    errors.lastName = {
+      message: 'Required',
+      state: 'error',
+    };
+  }
+
+  // ! ------------------------------------------
   // Email (use inputField)
   // ! ------------------------------------------
   if (!values.email) {
@@ -19,10 +39,10 @@ const validate = values => {
   }
 
   // ! ------------------------------------------
-  // Role (use selectField)
+  // Password for sign in (use inputField)
   // ! ------------------------------------------
-  if (!values.role) {
-    errors.role = {
+  if (!values.password) {
+    errors.password = {
       message: 'Required',
       state: 'error',
     };
@@ -70,6 +90,16 @@ const validate = values => {
     if (values.passwordCreate !== values.passwordConfirm) {
       errors.passwordConfirm = 'Passwords must match!';
     }
+  }
+
+  // ! ------------------------------------------
+  // Role (use selectField)
+  // ! ------------------------------------------
+  if (!values.role) {
+    errors.role = {
+      message: 'Required',
+      state: 'error',
+    };
   }
 
   return errors;

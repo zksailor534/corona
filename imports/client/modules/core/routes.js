@@ -8,13 +8,13 @@ import { syncHistoryWithStore } from 'react-router-redux';
 // Core Components
 import Layout from './components/layout';
 import HomePage from './components/homePage';
-import Login from './containers/login';
 import NotFound from './components/not-found';
-import RecoverPassword from './containers/recover-password';
-import ResetPassword from './containers/reset-password';
-import Signup from './containers/signup';
 
 // Admin Components
+import Login from '../admin/containers/Login';
+import Signup from '../admin/containers/Signup';
+import RecoverPassword from '../admin/containers/RecoverPassword';
+import ResetPassword from '../admin/containers/ResetPassword';
 import AdminPage from '../admin/components/AdminPage';
 import AcceptInvitation from '../admin/containers/AcceptInvitation';
 

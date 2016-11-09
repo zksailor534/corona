@@ -4,11 +4,11 @@ import { browserHistory } from 'react-router';
 // ! ------------------------------------------
 // Redux action creators
 // ! ------------------------------------------
-const requestLogin = () => ({
+const loginRequest = () => ({
   type: 'LOGIN_REQUEST',
 });
 
-const receiveLogin = (user) => ({
+const loginSuccess = (user) => ({
   type: 'LOGIN_SUCCESS',
   user,
 });
@@ -17,19 +17,19 @@ const loginError = () => ({
   type: 'LOGIN_FAILURE',
 });
 
-const requestLogout = () => ({
+const logoutRequest = () => ({
   type: 'LOGOUT_REQUEST',
 });
 
-const receiveLogout = () => ({
+const logoutSuccess = () => ({
   type: 'LOGOUT_SUCCESS',
 });
 
-const requestSignup = () => ({
+const signupRequest = () => ({
   type: 'SIGNUP_REQUEST',
 });
 
-const receiveSignup = (user) => ({
+const signupSuccess = (user) => ({
   type: 'SIGNUP_SUCCESS',
   user,
 });
@@ -38,11 +38,11 @@ const signupError = () => ({
   type: 'SIGNUP_FAILURE',
 });
 
-const requestResetPassword = () => ({
+const resetPasswordRequest = () => ({
   type: 'RESET_PASSWORD_REQUEST',
 });
 
-const receiveResetPassword = (user) => ({
+const resetPasswordSuccess = (user) => ({
   type: 'RESET_PASSWORD_SUCCESS',
   user,
 });
@@ -59,7 +59,7 @@ export default {
     const { dispatch } = Store;
 
     // Change state to login request
-    dispatch(requestLogin());
+    dispatch(loginRequest());
 
     // Call login procedure
     Meteor.loginWithPassword(email, password, (error) => {
@@ -70,7 +70,7 @@ export default {
       } else {
         Bert.alert('Logged in!', 'success');
         // Change state to successful login
-        dispatch(receiveLogin(Meteor.user()));
+        dispatch(loginSuccess(Meteor.user()));
 
         // Redirect to next page
         const state = Store.getState().routing.locationBeforeTransitions.state;
@@ -90,7 +90,7 @@ export default {
     const { dispatch } = Store;
 
     // Change state to logout request
-    dispatch(requestLogout());
+    dispatch(logoutRequest());
 
     // Call logout procedure
     Meteor.logout((error) => {
@@ -99,7 +99,7 @@ export default {
       } else {
         Bert.alert('Logged out!', 'success');
         // Change state to successful logout
-        dispatch(receiveLogout());
+        dispatch(logoutSuccess());
 
         // Redirect to login screen
         browserHistory.push('/login');
@@ -108,40 +108,47 @@ export default {
   },
 
   // ! ------------------------------------------
-  // Submit Signup
+  // Submit Signup from Invite or Form
   // ! ------------------------------------------
-  submitSignup({ Meteor, Store, Bert }, { email, password, firstName, lastName }) {
+  submitSignup({ Meteor, Store, Bert }, props) {
     const { dispatch } = Store;
+    const { email, passwordCreate, firstName, lastName, token = null, role = 'user' } = props;
 
     // Change state to signup request
-    dispatch(requestSignup());
+    dispatch(signupRequest());
 
     const user = {
       email,
-      password,
+      password: passwordCreate,
       profile: {
         name: {
           first: firstName,
           last: lastName,
         },
       },
+      roles: [role],
+      token,
     };
 
-    // Call signup procedure
-    Accounts.createUser(user, (error) => {
-      if (error) {
-        Bert.alert(error.reason, 'danger');
-        // Change state to signup error
-        dispatch(signupError());
-      } else {
-        Bert.alert('Welcome!', 'success');
-        // Change state to successful login
-        dispatch(receiveSignup(Meteor.user()));
+    Meteor.call(
+      'user.add',
+      user, (error, response) => {
+        if (error) {
+          Bert.alert(error.reason, 'danger');
+          // Change state to signup error
+          dispatch(signupError());
+        } else {
+          // Change state to successful login
+          dispatch(signupSuccess(response));
 
-        // Redirect to home screen
-        browserHistory.push('/');
+          // Announce success
+          Bert.alert(`Welcome ${firstName}!`, 'success');
+
+          // Redirect to home screen
+          browserHistory.push('/');
+        }
       }
-    });
+    );
   },
 
   // ! ------------------------------------------
@@ -168,7 +175,7 @@ export default {
     const { dispatch } = Store;
 
     // Change state to password reset request
-    dispatch(requestResetPassword());
+    dispatch(resetPasswordRequest());
 
     // Call reset password procedure
     Accounts.resetPassword(token, password, (error) => {
@@ -179,7 +186,7 @@ export default {
       } else {
         Bert.alert('Password reset!', 'success');
         // Change state to successful password reset
-        dispatch(receiveResetPassword(Meteor.user()));
+        dispatch(resetPasswordSuccess(Meteor.user()));
 
         // Redirect to home screen
         browserHistory.push('/');

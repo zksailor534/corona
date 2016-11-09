@@ -1,7 +1,7 @@
 import { useDeps, composeAll } from 'mantra-core';
 import { reduxForm } from 'redux-form';
 
-import Signup from '../components/signup';
+import Signup from '../components/Signup';
 import validate from '../lib/validate-field';
 
 export const depsMapper = (context, actions) => ({

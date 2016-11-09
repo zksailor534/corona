@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { Field } from 'redux-form';
 import { Form, Row, Col, Button } from 'react-bootstrap';
-import { inputField, passwordField } from './form-fields';
+import { inputField, passwordField } from '../form-fields';
 
 const Signup = (props) => {
   const { handleSubmit, pristine, submitting, invalid } = props;

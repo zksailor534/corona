@@ -35,15 +35,11 @@ export const addInvitation = new ValidatedMethod({
     token: { type: String },
     role: { type: String },
     date: { type: Date },
-    send: { type: Boolean, defaultValue: true, optional: true },
   }).validator(),
   run(invite) {
     if (!Invitations.findOne({ token: invite.token })) Invitations.insert(invite);
-    console.log(invite.send);
-    if (invite.send) {
-      const email = _prepareEmail(invite.token);
-      _sendInvitation(invite.email, email);
-    }
+    const email = _prepareEmail(invite.token);
+    _sendInvitation(invite.email, email);
   },
 });
 

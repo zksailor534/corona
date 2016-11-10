@@ -1,0 +1,6 @@
+{
+  "name": "InvitationList",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./InvitationList.js"
+}

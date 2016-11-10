@@ -49,4 +49,11 @@ describe('Documents methods', () => {
     const getDocument = Documents.findOne(_id);
     expect(getDocument).to.equal(undefined);
   });
+
+  after(function () {
+    // Clean up
+    if (Meteor.isServer) {
+      resetDatabase();
+    }
+  });
 });

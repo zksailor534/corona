@@ -8,21 +8,27 @@ import { syncHistoryWithStore } from 'react-router-redux';
 // Core Components
 import Layout from './components/layout';
 import HomePage from './components/homePage';
-import Login from './containers/login';
 import NotFound from './components/not-found';
-import RecoverPassword from './containers/recover-password';
-import ResetPassword from './containers/reset-password';
-import Signup from './containers/signup';
+
+// Admin Components
+import Login from '../admin/containers/Login';
+import Signup from '../admin/containers/Signup';
+import RecoverPassword from '../admin/containers/RecoverPassword';
+import ResetPassword from '../admin/containers/ResetPassword';
+import AdminPage from '../admin/components/AdminPage';
+import AcceptInvitation from '../admin/containers/AcceptInvitation';
 
 // Documents Components
 import Documents from '../documents/components/documents';
 
-export default function (injectDeps, { Meteor, Store }) {
+export default function (injectDeps, { Store }) {
   const history = syncHistoryWithStore(browserHistory, Store);
   const LayoutCtx = injectDeps(Layout);
 
   const requireAuth = (nextState, replace) => {
-    if (!Meteor.loggingIn() && !Meteor.userId()) {
+    const loggingIn = Store.getState().accounts.isFetching;
+    const loggedIn = Store.getState().accounts.isAuthenticated;
+    if (!loggingIn && !loggedIn) {
       replace({
         pathname: '/login',
         state: { nextPathname: nextState.location.pathname },
@@ -35,6 +41,8 @@ export default function (injectDeps, { Meteor, Store }) {
       <Router history={history}>
         <Route path="/" component={LayoutCtx}>
           <IndexRoute component={HomePage} onEnter={ requireAuth } />
+          <Route name="admin" path="/admin" component={ AdminPage } onEnter={ requireAuth } />
+          <Route name="accept-invitation" path="/invite/:token" component={ AcceptInvitation } />
           <Route
             name="documents"
             path="/documents"

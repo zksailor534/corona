@@ -18,7 +18,14 @@ const Login = (props) => {
         <Field name='email' type='text' component={inputField} label='Email Address'/>
         <Field name='password' type='password' component={inputField} label='Password'/>
         <div>
-          <Button type='submit' disabled={pristine || submitting || invalid}>Submit</Button>
+          <Button
+            type='submit'
+            id='loginButton'
+            bsStyle={invalid ? 'default' : 'primary'}
+            disabled={pristine || submitting || invalid}
+          >
+            Submit
+          </Button>
           <Link className='pull-right' to='/recover-password'>Forgot Password?</Link>
         </div>
       </Form>

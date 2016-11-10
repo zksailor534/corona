@@ -6,14 +6,25 @@ import { inputField } from '../form-fields';
 const RecoverPassword = (props) => {
   const { handleSubmit, pristine, submitting, invalid } = props;
   return (
-    <Col xs={ 12 } sm={ 8 } md={ 6 } lg={ 6 }>
+    <Col
+      xs={ 12 }
+      sm={ 8 } smOffset={ 2 }
+      md={ 6 } mdOffset={ 3 }
+      lg={ 6 } lgOffset={ 3 }
+    >
       <h4 className='page-header'>Recover Password</h4>
       <Alert bsStyle='info'>
         Enter your email address below to receive a link to reset your password.
       </Alert>
       <Form onSubmit={handleSubmit}>
         <Field name='email' type='text' component={inputField} label='Email Address'/>
-        <Button type='submit' disabled={pristine || submitting || invalid}>Submit</Button>
+        <Button
+          type='submit'
+          bsStyle={invalid ? 'default' : 'primary'}
+          disabled={pristine || submitting || invalid}
+        >
+          Submit
+        </Button>
       </Form>
     </Col>
   );

@@ -15,37 +15,39 @@ const ResetPassword = (props) => {
   };
 
   return (
-      <Col xs={ 12 } sm={ 8 } md={ 6 } lg={ 6 }>
-        <h4 className="page-header">Reset Password</h4>
+    <Col
+      xs={ 12 }
+      sm={ 8 } smOffset={ 2 }
+      md={ 6 } mdOffset={ 3 }
+      lg={ 6 } lgOffset={ 3 }
+    >
+      <h4 className="page-header">Reset Password</h4>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Alert bsStyle="info">
           To reset your password, enter a new one below. You will be logged in
-with your new password.
+  with your new password.
         </Alert>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <Field
-            name='token'
-            component='input'
-            type='text'
-            value={params.token}
-            style={{ display: 'none' }}
-          />
-          <Field
-            name='passwordCreate'
-            type='password'
-            component={passwordField}
-            label='Password'
-          />
-          <Field
-            name='passwordConfirm'
-            type='password'
-            component={inputField}
-            label='Confirm Password'
-          />
-          <Button type='submit' disabled={pristine || submitting || invalid}>
-            Reset Password &amp; Login
-          </Button>
-        </Form>
-      </Col>
+        <Field
+          name='passwordCreate'
+          type='password'
+          component={passwordField}
+          label='Password'
+        />
+        <Field
+          name='passwordConfirm'
+          type='password'
+          component={inputField}
+          label='Confirm Password'
+        />
+        <Button
+          type='submit'
+          bsStyle={invalid ? 'default' : 'primary'}
+          disabled={pristine || submitting || invalid}
+        >
+          Reset Password &amp; Login
+        </Button>
+      </Form>
+    </Col>
   );
 };
 

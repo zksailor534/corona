@@ -19,11 +19,11 @@ const AuthenticatedNavigation = ({ submitLogout, user }) => (
       </LinkContainer>
     </Nav>
     <Nav pullRight>
-      <NavDropdown eventKey={ 3 } title={ userName(user) } id="basic-nav-dropdown">
+      <NavDropdown eventKey={ 3 } title={ userName(user) } id="user-nav-dropdown">
         {Roles.userIsInRole(user._id, 'admin') && (<LinkContainer to="/admin">
-          <MenuItem eventKey={ 3.1 } >Admin</MenuItem>
+          <MenuItem eventKey={ 3.1 } id="admin-menu" >Admin</MenuItem>
         </LinkContainer>)}
-        <MenuItem eventKey={ 3.2 } onClick={ () => submitLogout() }>Logout</MenuItem>
+        <MenuItem eventKey={ 3.2 } id="logout" onClick={ () => submitLogout() }>Logout</MenuItem>
       </NavDropdown>
     </Nav>
   </div>

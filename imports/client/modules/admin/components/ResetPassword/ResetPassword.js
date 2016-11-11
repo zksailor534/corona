@@ -41,6 +41,7 @@ const ResetPassword = (props) => {
         />
         <Button
           type='submit'
+          id='resetButton'
           bsStyle={invalid ? 'default' : 'primary'}
           disabled={pristine || submitting || invalid}
         >

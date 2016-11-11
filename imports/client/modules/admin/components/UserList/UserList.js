@@ -1,12 +1,13 @@
 import React from 'react';
 import {
   Alert,
+  Button,
 } from 'react-bootstrap';
 import { Roles } from 'meteor/alanning:roles';
 import User from '../User';
 
 const UserList = (props) => {
-  const { changeRole, users, currentUser, removeUser } = props;
+  const { changeRole, users, currentUser, removeUser, openModal } = props;
 
   const listUsers = () => (
     users.map((u) => {
@@ -28,6 +29,9 @@ const UserList = (props) => {
     <div>
       <div className='page-header clearfix'>
         <h4 className='pull-left'>Users</h4>
+        <div className='pull-right'>
+          <Button onClick={openModal}>New User</Button>
+        </div>
       </div>
       {users.length > 0 ?
         <div className='table-responsive'>
@@ -56,6 +60,7 @@ UserList.propTypes = {
   removeUser: React.PropTypes.func,
   users: React.PropTypes.array,
   currentUser: React.PropTypes.string,
+  openModal: React.PropTypes.func,
   dirty: React.PropTypes.bool,
   submitting: React.PropTypes.bool,
 };

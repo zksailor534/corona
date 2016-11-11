@@ -4,5 +4,11 @@
     "domain": "localhost:3000",
     "siteName": "Mantra Base",
     "siteAdmin": "Mantra Admin <admin@mantra.com>"
+  },
+  "public": {
+    "accounts": {
+      "signup": false,
+      "invite": false
+    }
   }
 }

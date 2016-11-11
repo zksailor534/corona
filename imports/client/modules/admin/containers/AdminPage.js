@@ -1,14 +1,14 @@
 import { useDeps } from 'mantra-core';
 import { withRedux, composeAll } from 'react-komposer-plus';
 
-import Navigation from '../components/navigation';
+import AdminPage from '../components/AdminPage';
 
 const mapStateToProps = ({ accounts }) => ({
-  loggedIn: accounts.isAuthenticated,
-  signup: accounts.signup,
+  central: accounts.central,
+  signup: accounts.invite,
 });
 
 export default composeAll(
   withRedux(mapStateToProps),
   useDeps()
-)(Navigation);
+)(AdminPage);

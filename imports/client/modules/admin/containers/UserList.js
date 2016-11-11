@@ -16,9 +16,11 @@ const composer = ({ context }, onData) => {
 
 const mapStateToProps = ({ accounts }) => ({
   currentUser: accounts.user ? accounts.user._id : undefined,
+  central: accounts.central,
 });
 
 const depsMapper = (context, actions) => ({
+  openModal: actions.admin.openNewUserModal,
   changeRole: actions.admin.changeRole,
   removeUser: actions.admin.removeUser,
   context: () => context,

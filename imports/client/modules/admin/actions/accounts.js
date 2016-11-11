@@ -126,7 +126,7 @@ export default {
           last: lastName,
         },
       },
-      roles: [role],
+      roles: [role], // TODO change role to roles array
       token,
     };
 

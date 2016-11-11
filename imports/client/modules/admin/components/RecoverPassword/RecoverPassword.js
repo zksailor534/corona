@@ -20,6 +20,7 @@ const RecoverPassword = (props) => {
         <Field name='email' type='text' component={inputField} label='Email Address'/>
         <Button
           type='submit'
+          id='recoverButton'
           bsStyle={invalid ? 'default' : 'primary'}
           disabled={pristine || submitting || invalid}
         >

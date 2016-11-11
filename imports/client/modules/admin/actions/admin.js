@@ -33,6 +33,14 @@ const removeUserSuccess = (id) => ({
   id,
 });
 
+const openNewUser = () => ({
+  type: 'OPEN_NEW_USER_MODAL',
+});
+
+const closeNewUser = () => ({
+  type: 'CLOSE_NEW_USER_MODAL',
+});
+
 const openInvite = () => ({
   type: 'OPEN_INVITE_MODAL',
 });
@@ -45,6 +53,8 @@ export default {
   // ! ------------------------------------------
   // Expose bound redux actions
   // ! ------------------------------------------
+  openNewUserModal({ Store }) { Store.dispatch(openNewUser()); },
+  closeNewUserModal({ Store }) { Store.dispatch(closeNewUser()); },
   openInviteModal({ Store }) { Store.dispatch(openInvite()); },
   closeInviteModal({ Store }) { Store.dispatch(closeInvite()); },
 

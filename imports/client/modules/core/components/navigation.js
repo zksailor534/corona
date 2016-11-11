@@ -5,8 +5,10 @@ import PublicNavigation from './public-navigation';
 import AuthenticatedNavigation from '../containers/authenticated-navigation';
 
 class Navigation extends React.Component {
-  renderNavigation(loggedIn) {
-    return loggedIn ? <AuthenticatedNavigation /> : <PublicNavigation />;
+  renderNavigation(loggedIn, signup = true) {
+    return loggedIn ?
+      <AuthenticatedNavigation /> :
+      <PublicNavigation signup={signup} />;
   }
 
   render() {
@@ -19,7 +21,7 @@ class Navigation extends React.Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          { this.renderNavigation(this.props.loggedIn) }
+          { this.renderNavigation(this.props.loggedIn, this.props.signup) }
         </Navbar.Collapse>
       </Navbar>
     );
@@ -28,6 +30,7 @@ class Navigation extends React.Component {
 
 Navigation.propTypes = {
   loggedIn: React.PropTypes.bool.isRequired,
+  signup: React.PropTypes.bool,
 };
 
 export default Navigation;

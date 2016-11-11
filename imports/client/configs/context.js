@@ -21,6 +21,9 @@ export default function ({ reducers }) {
     accounts: {
       isFetching: false,
       isAuthenticated: false,
+      signup: Meteor.settings.public.accounts.signup,
+      invite: Meteor.settings.public.accounts.invite,
+      central: !Meteor.settings.public.accounts.signup && !Meteor.settings.public.accounts.invite,
     },
   };
 

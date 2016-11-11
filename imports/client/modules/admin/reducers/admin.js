@@ -84,6 +84,14 @@ export default (state = initialAdminState, action) => {
         users: users(state.users, action),
         isChanging: false,
       });
+    case 'OPEN_NEW_USER_MODAL':
+      return Object.assign({}, state, {
+        newUserModal: true,
+      });
+    case 'CLOSE_NEW_USER_MODAL':
+      return Object.assign({}, state, {
+        newUserModal: false,
+      });
     case 'OPEN_INVITE_MODAL':
       return Object.assign({}, state, {
         inviteModal: true,

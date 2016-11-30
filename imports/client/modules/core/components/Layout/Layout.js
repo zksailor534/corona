@@ -1,5 +1,4 @@
 import React from 'react';
-import { Grid } from 'react-bootstrap';
 import Helmet from 'react-helmet';
 
 import Navigation from '../../containers/Navigation';
@@ -10,9 +9,7 @@ const Layout = ({ children, name = 'Title' }) => (
       title={name}
     />
     <Navigation />
-    <Grid>
-      {children}
-    </Grid>
+    {children}
   </div>
 );
 

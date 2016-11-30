@@ -7,6 +7,7 @@ import { reducer as formReducer } from 'redux-form';
 
 // Import bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
 import 'react-select/dist/react-select.css';
 
 // Context

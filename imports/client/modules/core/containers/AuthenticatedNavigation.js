@@ -1,7 +1,7 @@
 import { useDeps } from 'mantra-core';
 import { withRedux, composeAll } from 'react-komposer-plus';
 
-import AuthenticatedNavigation from '../components/authenticated-navigation';
+import AuthenticatedNavigation from '../components/AuthenticatedNavigation';
 
 const mapStateToProps = ({ accounts }) => ({
   user: accounts.user,

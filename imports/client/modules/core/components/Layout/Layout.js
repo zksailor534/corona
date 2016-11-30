@@ -2,12 +2,12 @@ import React from 'react';
 import { Grid } from 'react-bootstrap';
 import Helmet from 'react-helmet';
 
-import Navigation from '../containers/navigation';
+import Navigation from '../../containers/Navigation';
 
-const Layout = ({ children }) => (
+const Layout = ({ children, name = 'Title' }) => (
   <div className="app">
     <Helmet
-      titleTemplate="Mantra - %s"
+      title={name}
     />
     <Navigation />
     <Grid>
@@ -17,6 +17,7 @@ const Layout = ({ children }) => (
 );
 
 Layout.propTypes = {
+  name: React.PropTypes.string,
   children: React.PropTypes.node,
 };
 

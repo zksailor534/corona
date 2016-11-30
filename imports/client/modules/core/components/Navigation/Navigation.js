@@ -1,8 +1,8 @@
 import React from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Link } from 'react-router';
-import PublicNavigation from './public-navigation';
-import AuthenticatedNavigation from '../containers/authenticated-navigation';
+import PublicNavigation from '../PublicNavigation';
+import AuthenticatedNavigation from '../../containers/AuthenticatedNavigation';
 
 class Navigation extends React.Component {
   renderNavigation(loggedIn, signup = true) {
@@ -16,7 +16,7 @@ class Navigation extends React.Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/">Application Name</Link>
+            <Link to="/">{this.props.name}</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -31,6 +31,7 @@ class Navigation extends React.Component {
 Navigation.propTypes = {
   loggedIn: React.PropTypes.bool.isRequired,
   signup: React.PropTypes.bool,
+  name: React.PropTypes.string,
 };
 
 export default Navigation;

@@ -10,14 +10,14 @@ const userName = (user) => {
 
 const AuthenticatedNavigation = ({ submitLogout, user }) => (
   <div>
-    <Nav>
+    {/* <Nav>
       <IndexLinkContainer to="/">
         <NavItem eventKey={ 1 } href="/">Index</NavItem>
       </IndexLinkContainer>
       <LinkContainer to="/documents">
         <NavItem eventKey={ 2 } href="/documents">Documents</NavItem>
       </LinkContainer>
-    </Nav>
+    </Nav> */}
     <Nav pullRight>
       <NavDropdown eventKey={ 3 } title={ userName(user) } id="user-nav-dropdown">
         {Roles.userIsInRole(user._id, 'admin') && (<LinkContainer to="/admin">

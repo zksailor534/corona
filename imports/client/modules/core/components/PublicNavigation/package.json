@@ -1,0 +1,6 @@
+{
+  "name": "PublicNavigation",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./PublicNavigation.js"
+}

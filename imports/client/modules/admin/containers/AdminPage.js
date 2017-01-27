@@ -10,5 +10,5 @@ const mapStateToProps = ({ accounts }) => ({
 
 export default composeAll(
   withRedux(mapStateToProps),
-  useDeps()
+  useDeps(),
 )(AdminPage);

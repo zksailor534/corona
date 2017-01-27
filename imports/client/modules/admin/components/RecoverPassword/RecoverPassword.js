@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Col, Alert, Button } from 'react-bootstrap';
 import { Field } from 'redux-form';
-import { inputField } from '../form-fields';
+import { textField } from '../form-fields';
 
 const RecoverPassword = (props) => {
   const { handleSubmit, pristine, submitting, invalid } = props;
@@ -17,7 +17,7 @@ const RecoverPassword = (props) => {
         Enter your email address below to receive a link to reset your password.
       </Alert>
       <Form onSubmit={handleSubmit}>
-        <Field name='email' type='text' component={inputField} label='Email Address'/>
+        <Field name='email' type='text' component={textField} label='Email Address'/>
         <Button
           type='submit'
           id='recoverButton'

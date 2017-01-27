@@ -8,6 +8,6 @@ export default function () {
         'emails.address': 1,
         roles: 1,
       },
-    })
+    }),
   );
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import { Form, Col, Alert, Button } from 'react-bootstrap';
-import { inputField, passwordField } from '../form-fields';
+import { textField, passwordField } from '../form-fields';
 
 const ResetPassword = (props) => {
   const { resetPassword, handleSubmit, pristine, submitting, invalid, params } = props;
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     const d = {
       password: data.passwordCreate,
       token: params.token,
@@ -36,7 +36,7 @@ const ResetPassword = (props) => {
         <Field
           name='passwordConfirm'
           type='password'
-          component={inputField}
+          component={textField}
           label='Confirm Password'
         />
         <Button

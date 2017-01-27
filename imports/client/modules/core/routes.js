@@ -18,6 +18,9 @@ import ResetPassword from '../admin/containers/ResetPassword';
 import AdminPage from '../admin/containers/AdminPage';
 import AcceptInvitation from '../admin/containers/AcceptInvitation';
 
+// Documents Components
+import DocumentsPage from '../documents/components/DocumentsPage';
+
 export default function (injectDeps, { Store }) {
   const history = syncHistoryWithStore(browserHistory, Store);
   const LayoutCtx = injectDeps(Layout);
@@ -45,6 +48,12 @@ export default function (injectDeps, { Store }) {
           <Route name="admin" path="/admin" component={ AdminPage } onEnter={ requireAuth } />
           {(invite) &&
             <Route name="accept-invitation" path="/invite/:token" component={ AcceptInvitation } />}
+          <Route
+            name="documents"
+            path="/documents"
+            component={ DocumentsPage }
+            onEnter={ requireAuth }
+          />
           <Route name="login" path="/login" component={ Login } />
           <Route name="recover-password" path="/recover-password" component={ RecoverPassword } />
           <Route name="reset-password" path="/reset-password/:token" component={ ResetPassword } />
@@ -54,6 +63,6 @@ export default function (injectDeps, { Store }) {
         </Route>
       </Router>
     </Provider>,
-    document.getElementById('react-root')
+    document.getElementById('react-root'),
   );
 }

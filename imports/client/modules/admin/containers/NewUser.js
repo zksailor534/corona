@@ -17,5 +17,5 @@ const depsMapper = (context, actions) => ({
 
 export default composeAll(
   withRedux(mapStateToProps),
-  useDeps(depsMapper)
+  useDeps(depsMapper),
 )(reduxForm({ form: 'newUser', validate })(NewUser));

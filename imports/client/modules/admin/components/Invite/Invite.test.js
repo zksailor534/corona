@@ -24,7 +24,7 @@ describe('<Invite />', () => {
       expect(wrapper.props().role).to.be.defined;
       expect(wrapper.props().date).to.be.defined;
       expect(wrapper.props().removeInvite).to.be.defined;
-    }
+    },
   );
 
   it('should have a button to remove invite', function () {
@@ -39,7 +39,7 @@ describe('<Invite />', () => {
         token={testInvite.token}
         role={testInvite.role}
         date={testInvite.date}
-      />
+      />,
     );
     expect(wrapper.find(`#email-${testInvite.token}`).text()).to.equal(testInvite.email);
     expect(wrapper.find(`#role-${testInvite.token}`).text()).to.equal(testInvite.role);
@@ -59,7 +59,7 @@ describe('<Invite />', () => {
             removeInvite={removeInvite}
           />
         </tbody>
-      </table>
+      </table>,
     );
     wrapper.find('Button').simulate('click');
     expect(removeInvite.calledOnce).to.equal(true);

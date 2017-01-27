@@ -76,7 +76,7 @@ describe('Admin methods', () => {
 
     // Change role
     setRoleOnUser.call(
-      { id: userTwo._id, role: newRole }
+      { id: userTwo._id, role: newRole },
     );
     // eslint-disable-next-line no-unused-expressions
     expect(Roles.userIsInRole(userTwo._id, [newRole])).to.be.tru;
@@ -88,7 +88,7 @@ describe('Admin methods', () => {
       {
         id: userOne._id,
         requestingUser: userTwo._id,
-      }
+      },
     );
     const getUser = Meteor.users.findOne({ _id: userOne._id });
     expect(getUser).to.not.equal(undefined);
@@ -100,7 +100,7 @@ describe('Admin methods', () => {
       {
         id: userTwo._id,
         requestingUser: userOne._id,
-      }
+      },
     );
     const getUser = Meteor.users.findOne({ _id: userTwo._id });
     expect(getUser).to.equal(undefined);

@@ -7,7 +7,7 @@ import {
 } from 'react-bootstrap';
 import Select from 'react-select';
 
-export const inputField = ({ input, name, label, type,
+export const textField = ({ input, name, label, type,
   meta: { touched, error, dirty } }) => {
   let state = null;
   let message = null;
@@ -35,7 +35,7 @@ export const inputField = ({ input, name, label, type,
   );
 };
 
-inputField.propTypes = {
+textField.propTypes = {
   input: React.PropTypes.object,
   name: React.PropTypes.string,
   label: React.PropTypes.string,

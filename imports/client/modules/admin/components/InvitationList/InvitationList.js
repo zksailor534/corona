@@ -10,7 +10,7 @@ const InvitationList = (props) => {
   const { invitations, removeInvite, openModal } = props;
 
   const listInvites = () => (
-    invitations.map((i) => (
+    invitations.map(i => (
       <Invite
         key={i.token}
         email={i.email}

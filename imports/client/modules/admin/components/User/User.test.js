@@ -32,7 +32,7 @@ describe('<User />', () => {
       expect(wrapper.props().changeRole).to.be.defined;
       expect(wrapper.props().currentUser).to.be.defined;
       expect(wrapper.props().removeUser).to.be.defined;
-    }
+    },
   );
 
   it('should have a button to remove user', function () {
@@ -58,7 +58,7 @@ describe('<User />', () => {
         <tbody>
           <User user={testUser} changeRole={changeRole} />
         </tbody>
-      </table>
+      </table>,
     );
     wrapper.find('select').simulate('change');
     expect(changeRole.calledOnce).to.equal(true);

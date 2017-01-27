@@ -7,7 +7,7 @@ import {
   Alert,
 } from 'react-bootstrap';
 import { Field } from 'redux-form';
-import { inputField, passwordField } from '../form-fields';
+import { textField, passwordField } from '../form-fields';
 
 const AcceptInvitation = ({ invitation, handleSubmit, pristine, submitting, invalid }) => (
   <Row>
@@ -36,16 +36,16 @@ const AcceptInvitation = ({ invitation, handleSubmit, pristine, submitting, inva
         />
         <Row>
           <Col xs={ 12 } sm={ 6 } md={ 6 } lg={ 6 }>
-            <Field name='firstName' type='text' component={inputField} label='First Name'/>
+            <Field name='firstName' type='text' component={textField} label='First Name'/>
           </Col>
           <Col xs={ 12 } sm={ 6 } md={ 6 } lg={ 6 }>
-            <Field name='lastName' type='text' component={inputField} label='Last Name'/>
+            <Field name='lastName' type='text' component={textField} label='Last Name'/>
           </Col>
         </Row>
         <Field
           name='email'
           type='text'
-          component={inputField}
+          component={textField}
           label='Email Address'
         />
         <Field
@@ -57,7 +57,7 @@ const AcceptInvitation = ({ invitation, handleSubmit, pristine, submitting, inva
         <Field
           name='passwordConfirm'
           type='password'
-          component={inputField}
+          component={textField}
           label='Confirm Password'
         />
         <Button

@@ -9,5 +9,5 @@ const mapStateToProps = ({ application }) => ({
 
 export default composeAll(
   withRedux(mapStateToProps),
-  useDeps()
+  useDeps(),
 )(Layout);

@@ -3,32 +3,32 @@ import { Random } from 'meteor/random';
 // ! ------------------------------------------
 // Redux action creators
 // ! ------------------------------------------
-const roleChangeRequest = (id) => ({
+const roleChangeRequest = id => ({
   type: 'ROLE_CHANGE_REQUEST',
   id,
 });
 
-const roleChangeError = (id) => ({
+const roleChangeError = id => ({
   type: 'ROLE_CHANGE_ERROR',
   id,
 });
 
-const roleChangeSuccess = (id) => ({
+const roleChangeSuccess = id => ({
   type: 'ROLE_CHANGE_SUCCESS',
   id,
 });
 
-const removeUserRequest = (id) => ({
+const removeUserRequest = id => ({
   type: 'REMOVE_USER_REQUEST',
   id,
 });
 
-const removeUserError = (id) => ({
+const removeUserError = id => ({
   type: 'REMOVE_USER_ERROR',
   id,
 });
 
-const removeUserSuccess = (id) => ({
+const removeUserSuccess = id => ({
   type: 'REMOVE_USER_SUCCESS',
   id,
 });
@@ -83,7 +83,7 @@ export default {
           // Change state to successful login
           dispatch(roleChangeSuccess(id));
         }
-      }
+      },
     );
   },
 
@@ -112,7 +112,7 @@ export default {
           // Change state to successful login
           dispatch(removeUserSuccess(id));
         }
-      }
+      },
     );
   },
 
@@ -141,7 +141,7 @@ export default {
           Bert.alert('Invite sent!', 'success');
           dispatch(closeInvite());
         }
-      }
+      },
     );
   },
 
@@ -160,7 +160,7 @@ export default {
         } else {
           Bert.alert('Invite removed!', 'success');
         }
-      }
+      },
     );
   },
 };

@@ -5,7 +5,7 @@ import InvitationList from '../../containers/InvitationList';
 import NewInvitation from '../../containers/NewInvitation';
 
 const AdminPage = ({ central, invite }) => (
-  <div>
+  <div className="container">
     <UserList />
     {central && <NewUser />}
     {invite && <InvitationList />}

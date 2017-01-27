@@ -31,8 +31,8 @@ export default function ({ reducers }) {
     initialState,
     compose(
       applyMiddleware(ReduxThunk),
-      window.devToolsExtension ? window.devToolsExtension() : f => f
-    )
+      window.devToolsExtension ? window.devToolsExtension() : f => f,
+    ),
   );
 
   return {

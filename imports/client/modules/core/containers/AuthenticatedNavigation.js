@@ -14,5 +14,5 @@ export const depsMapper = (context, actions) => ({
 
 export default composeAll(
   withRedux(mapStateToProps),
-  useDeps(depsMapper)
+  useDeps(depsMapper),
 )(AuthenticatedNavigation);

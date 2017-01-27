@@ -12,7 +12,7 @@ describe('Invitations methods', () => {
   it('inserts an invitation in the Invitations collection', () => {
     const { email, role, token, date } = Factory.create('invitation');
     addInvitation.call(
-      { email, role, token, date }
+      { email, role, token, date },
     );
     const getInvite = Invitations.findOne({ email });
     expect(getInvite.email).to.equal(email);

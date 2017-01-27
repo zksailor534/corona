@@ -11,5 +11,5 @@ const mapStateToProps = ({ accounts, application }) => ({
 
 export default composeAll(
   withRedux(mapStateToProps),
-  useDeps()
+  useDeps(),
 )(Navigation);

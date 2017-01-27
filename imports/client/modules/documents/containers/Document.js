@@ -1,5 +1,5 @@
 import { useDeps, composeAll } from 'mantra-core';
-import Document from '../components/document';
+import Document from '../components/Document';
 
 export const depsMapper = (context, actions) => ({
   update: actions.documents.update,
@@ -7,5 +7,5 @@ export const depsMapper = (context, actions) => ({
 });
 
 export default composeAll(
-  useDeps(depsMapper)
+  useDeps(depsMapper),
 )(Document);

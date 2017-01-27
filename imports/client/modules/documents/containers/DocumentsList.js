@@ -2,7 +2,7 @@ import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import React from 'react';
 import Loading from 'react-loading';
 
-import DocumentsList from '../components/documents-list';
+import DocumentsList from '../components/DocumentsList';
 
 export const composer = ({ context }, onData) => {
   const { Meteor, Collections } = context();
@@ -12,11 +12,11 @@ export const composer = ({ context }, onData) => {
   }
 };
 
-export const depsMapper = (context) => ({
+export const depsMapper = context => ({
   context: () => context,
 });
 
 export default composeAll(
   composeWithTracker(composer, () => <Loading type='spokes' />),
-  useDeps(depsMapper)
+  useDeps(depsMapper),
 )(DocumentsList);

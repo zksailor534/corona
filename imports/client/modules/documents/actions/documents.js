@@ -20,7 +20,7 @@ export default {
           Store.dispatch(reset('documents-add'));
           Bert.alert('Document added!', 'success');
         }
-      }
+      },
     );
   },
 
@@ -39,7 +39,7 @@ export default {
         } else {
           Bert.alert('Document updated!', 'success');
         }
-      }
+      },
     );
   },
 
@@ -57,7 +57,7 @@ export default {
         } else {
           Bert.alert('Document removed!', 'success');
         }
-      }
+      },
     );
   },
 };

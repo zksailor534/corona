@@ -19,7 +19,7 @@ describe('Documents methods', () => {
     const _id = Meteor.uuid();
     const title = 'You can\'t arrest me, I\'m the Cake Boss!';
     insertDocument.call(
-      { _id, title }
+      { _id, title },
     );
     const getDocument = Documents.findOne({ title });
     expect(getDocument.title).to.equal(title);
@@ -34,7 +34,7 @@ describe('Documents methods', () => {
         update: {
           title,
         },
-      }
+      },
     );
 
     const getDocument = Documents.findOne(_id);
@@ -44,7 +44,7 @@ describe('Documents methods', () => {
   it('removes a document from the Documents collection', () => {
     const { _id } = Factory.create('document');
     removeDocument.call(
-      { _id }
+      { _id },
     );
     const getDocument = Documents.findOne(_id);
     expect(getDocument).to.equal(undefined);

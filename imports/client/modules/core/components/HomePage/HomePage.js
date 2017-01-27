@@ -10,7 +10,12 @@ const HomePage = () => (
     <br/>
     <p>Based on <strong>Base</strong> by Meteor Chef</p>
     <p><a className="btn btn-success" href="https://themeteorchef.com/base" role="button">Read the Base Documentation</a></p>
-    <p style={ { fontSize: '16px', color: '#aaa' } }>Currently at v0.3.0</p>
+    <p style={ { fontSize: '16px', color: '#aaa' } }>
+      Currently at v0.3.1<br/>
+      <a href="https://www.bithound.io/github/zksailor534/mantra-base">
+        <img src="https://www.bithound.io/github/zksailor534/mantra-base/badges/score.svg" alt="bitHound Overall Score" />
+      </a>
+    </p>
   </div>
 );
 

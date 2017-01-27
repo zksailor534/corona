@@ -1,0 +1,6 @@
+{
+  "name": "DocumentsPage",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./DocumentsPage.js"
+}

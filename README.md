@@ -1,6 +1,8 @@
+[![bitHound](https://www.bithound.io/github/zksailor534/mantra-base/badges/score.svg)](https://www.bithound.io/github/zksailor534/mantra-base)
+
 ## Mantra Base
 
-#### Version 0.3.0
+#### Version 0.3.1
 
 A Meteor application boilerplate that combines two separate boilerplates and applies
  the principles of the Mantra architecture. Still very much a work in progress,

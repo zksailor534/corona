@@ -19,7 +19,7 @@ import AdminPage from '../admin/containers/AdminPage';
 import AcceptInvitation from '../admin/containers/AcceptInvitation';
 
 // Documents Components
-import Documents from '../documents/components/documents';
+import DocumentsPage from '../documents/components/DocumentsPage';
 
 export default function (injectDeps, { Store }) {
   const history = syncHistoryWithStore(browserHistory, Store);
@@ -51,7 +51,7 @@ export default function (injectDeps, { Store }) {
           <Route
             name="documents"
             path="/documents"
-            component={ Documents }
+            component={ DocumentsPage }
             onEnter={ requireAuth }
           />
           <Route name="login" path="/login" component={ Login } />

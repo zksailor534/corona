@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import { Form } from 'react-bootstrap';
-import { titleField } from './form-fields';
+import { titleField } from '../form-fields';
 
 const AddDocument = (props) => {
   const { handleSubmit } = props;

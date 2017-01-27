@@ -1,10 +1,10 @@
 import zxcvbn from 'zxcvbn';
 
-const validate = values => {
+const validate = (values) => {
   const errors = {};
 
   // ! ------------------------------------------
-  // First Name (use inputField)
+  // First Name (use textField)
   // ! ------------------------------------------
   if (!values.firstName) {
     errors.firtName = {
@@ -14,7 +14,7 @@ const validate = values => {
   }
 
   // ! ------------------------------------------
-  // Last Name (use inputField)
+  // Last Name (use textField)
   // ! ------------------------------------------
   if (!values.lastName) {
     errors.lastName = {
@@ -24,7 +24,7 @@ const validate = values => {
   }
 
   // ! ------------------------------------------
-  // Email (use inputField)
+  // Email (use textField)
   // ! ------------------------------------------
   if (!values.email) {
     errors.email = {
@@ -39,7 +39,7 @@ const validate = values => {
   }
 
   // ! ------------------------------------------
-  // Password for sign in (use inputField)
+  // Password for sign in (use textField)
   // ! ------------------------------------------
   if (!values.password) {
     errors.password = {
@@ -82,7 +82,7 @@ const validate = values => {
   }
 
   // ! ------------------------------------------
-  // Password confirmation (use inputField)
+  // Password confirmation (use textField)
   // ! ------------------------------------------
   if (!values.passwordConfirm) {
     errors.passwordConfirm = 'Required';

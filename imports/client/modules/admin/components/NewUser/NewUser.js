@@ -7,9 +7,9 @@ import {
   Col,
   Button,
 } from 'react-bootstrap';
-import { inputField, selectField, passwordField } from '../form-fields';
+import { textField, selectField, passwordField } from '../form-fields';
 
-const NewInvitation = (props) => {
+const NewUser = (props) => {
   const { show, close, signup, handleSubmit, pristine, submitting, invalid } = props;
 
   const roleOptions = [
@@ -18,7 +18,7 @@ const NewInvitation = (props) => {
     { value: 'user', label: 'User' },
   ];
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     const d = Object.assign({}, data, {
       role: data.role.value,
     });
@@ -35,13 +35,13 @@ const NewInvitation = (props) => {
         <Modal.Body>
           <Row>
             <Col xs={ 12 } sm={ 6 } md={ 6 } lg={ 6 }>
-              <Field name='firstName' type='text' component={inputField} label='First Name'/>
+              <Field name='firstName' type='text' component={textField} label='First Name'/>
             </Col>
             <Col xs={ 12 } sm={ 6 } md={ 6 } lg={ 6 }>
-              <Field name='lastName' type='text' component={inputField} label='Last Name'/>
+              <Field name='lastName' type='text' component={textField} label='Last Name'/>
             </Col>
           </Row>
-          <Field name='email' type='text' component={inputField} label='Email Address' />
+          <Field name='email' type='text' component={textField} label='Email Address' />
           <Field name='role' component={selectField} label='User Role' options={roleOptions} />
           <Field
             name='passwordCreate'
@@ -52,7 +52,7 @@ const NewInvitation = (props) => {
           <Field
             name='passwordConfirm'
             type='password'
-            component={inputField}
+            component={textField}
             label='Confirm Password'
           />
         </Modal.Body>
@@ -71,7 +71,7 @@ const NewInvitation = (props) => {
   );
 };
 
-NewInvitation.propTypes = {
+NewUser.propTypes = {
   show: React.PropTypes.bool,
   close: React.PropTypes.func,
   signup: React.PropTypes.func,
@@ -81,4 +81,4 @@ NewInvitation.propTypes = {
   invalid: React.PropTypes.bool,
 };
 
-export default NewInvitation;
+export default NewUser;

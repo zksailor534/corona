@@ -5,7 +5,7 @@ import {
   Form,
   Button,
 } from 'react-bootstrap';
-import { inputField, selectField } from '../form-fields';
+import { textField, selectField } from '../form-fields';
 
 const NewInvitation = (props) => {
   const { show, close, handleSubmit, pristine, submitting, invalid } = props;
@@ -21,7 +21,7 @@ const NewInvitation = (props) => {
           <Modal.Title>Send Invitation</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Field name='email' type='text' component={inputField} label='Email Address' />
+          <Field name='email' type='text' component={textField} label='Email Address' />
           <Field name='role' component={selectField} label='User Role' options={roleOptions} />
         </Modal.Body>
         <Modal.Footer>

@@ -8,7 +8,7 @@ const loginRequest = () => ({
   type: 'LOGIN_REQUEST',
 });
 
-const loginSuccess = (user) => ({
+const loginSuccess = user => ({
   type: 'LOGIN_SUCCESS',
   user,
 });
@@ -29,7 +29,7 @@ const signupRequest = () => ({
   type: 'SIGNUP_REQUEST',
 });
 
-const signupSuccess = (user) => ({
+const signupSuccess = user => ({
   type: 'SIGNUP_SUCCESS',
   user,
 });
@@ -42,7 +42,7 @@ const resetPasswordRequest = () => ({
   type: 'RESET_PASSWORD_REQUEST',
 });
 
-const resetPasswordSuccess = (user) => ({
+const resetPasswordSuccess = user => ({
   type: 'RESET_PASSWORD_SUCCESS',
   user,
 });
@@ -147,7 +147,7 @@ export default {
           // Redirect to home screen
           browserHistory.push('/');
         }
-      }
+      },
     );
   },
 

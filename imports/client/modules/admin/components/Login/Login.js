@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { Field } from 'redux-form';
 import { Form, Col, Button } from 'react-bootstrap';
-import { inputField } from '../form-fields';
+import { textField, passwordField } from '../form-fields';
 
 const Login = (props) => {
   const { handleSubmit, pristine, submitting, invalid } = props;
@@ -15,8 +15,8 @@ const Login = (props) => {
     >
       <h4 className='page-header'>Login</h4>
       <Form onSubmit={handleSubmit}>
-        <Field name='email' type='text' component={inputField} label='Email Address'/>
-        <Field name='password' type='password' component={inputField} label='Password'/>
+        <Field name='email' type='text' component={textField} label='Email Address'/>
+        <Field name='password' type='password' component={passwordField} label='Password'/>
         <div>
           <Button
             type='submit'

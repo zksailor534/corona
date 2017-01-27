@@ -10,5 +10,5 @@ export const depsMapper = (context, actions) => ({
 });
 
 export default composeAll(
-  useDeps(depsMapper)
+  useDeps(depsMapper),
 )(reduxForm({ form: 'signup', validate })(RecoverPassword));

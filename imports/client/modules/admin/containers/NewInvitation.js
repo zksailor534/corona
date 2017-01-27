@@ -21,5 +21,5 @@ const depsMapper = (context, actions) => ({
 
 export default composeAll(
   compose(composer),
-  useDeps(depsMapper)
+  useDeps(depsMapper),
 )(reduxForm({ form: 'newInvite', validate })(NewInvitation));

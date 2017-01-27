@@ -29,5 +29,5 @@ const depsMapper = (context, actions) => ({
 export default composeAll(
   composeWithTracker(composer, () => <Loading type='spokes' />),
   withRedux(mapStateToProps),
-  useDeps(depsMapper)
+  useDeps(depsMapper),
 )(UserList);

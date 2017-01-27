@@ -32,5 +32,5 @@ const depsMapper = (context, actions) => ({
 
 export default composeAll(
   composeWithTracker(composer, () => <Loading type='spokes' />),
-  useDeps(depsMapper)
+  useDeps(depsMapper),
 )(reduxForm({ form: 'acceptInvitation', validate })(AcceptInvitation));

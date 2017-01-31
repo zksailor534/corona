@@ -6,6 +6,7 @@ import * as Collections from '/imports/lib/collections';
 // Redux
 import { createStore, applyMiddleware, compose } from 'redux';
 import ReduxThunk from 'redux-thunk';
+import { persistStore, autoRehydrate } from 'redux-persist';
 
 export default function ({ reducers }) {
   // Ensure no user is logged in on startup
@@ -30,10 +31,12 @@ export default function ({ reducers }) {
   const Store = createStore(reducers,
     initialState,
     compose(
+      autoRehydrate(),
       applyMiddleware(ReduxThunk),
       window.devToolsExtension ? window.devToolsExtension() : f => f,
     ),
   );
+  persistStore(Store);
 
   return {
     Meteor,

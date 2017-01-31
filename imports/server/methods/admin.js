@@ -12,10 +12,10 @@ export const setRoleOnUser = new ValidatedMethod({
   name: 'role.set',
   validate: new SimpleSchema({
     id: { type: String },
-    role: { type: String },
+    roles: { type: [String] },
   }).validator(),
   run(options) {
-    Roles.setUserRoles(options.id, [options.role]);
+    Roles.setUserRoles(options.id, options.roles);
   },
 });
 

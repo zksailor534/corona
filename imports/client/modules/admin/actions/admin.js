@@ -61,7 +61,7 @@ export default {
   // ! ------------------------------------------
   // Change User Role
   // ! ------------------------------------------
-  changeRole({ Meteor, Store, Bert }, id, role) {
+  changeRole({ Meteor, Store, Bert }, id, roles) {
     const { dispatch } = Store;
 
     // Change state to role change request
@@ -72,14 +72,14 @@ export default {
       'role.set',
       {
         id,
-        role,
+        roles,
       }, (error) => {
         if (error) {
           Bert.alert(error.reason, 'danger');
           // Change state to role change error
           dispatch(roleChangeError(id));
         } else {
-          Bert.alert('Role changed!', 'success');
+          Bert.alert('Roles changed!', 'success');
           // Change state to successful login
           dispatch(roleChangeSuccess(id));
         }
@@ -119,7 +119,7 @@ export default {
   // ! ------------------------------------------
   // Send User Invite
   // ! ------------------------------------------
-  sendInvite({ Meteor, Store, Bert }, { email, role }) {
+  sendInvite({ Meteor, Store, Bert }, { email, roles }) {
     const { dispatch } = Store;
 
     // Generate invite token and date
@@ -132,7 +132,7 @@ export default {
       {
         email,
         token,
-        role: role.value,
+        roles,
         date,
       }, (error) => {
         if (error) {

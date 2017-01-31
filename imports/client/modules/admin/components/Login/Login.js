@@ -16,7 +16,7 @@ const Login = (props) => {
       <h4 className='page-header'>Login</h4>
       <Form onSubmit={handleSubmit}>
         <Field name='email' type='text' component={textField} label='Email Address'/>
-        <Field name='password' type='password' component={passwordField} label='Password'/>
+        <Field name='password' type='password' component={textField} label='Password'/>
         <div>
           <Button
             type='submit'

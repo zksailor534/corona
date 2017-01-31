@@ -11,14 +11,15 @@ const UserList = (props) => {
 
   const listUsers = () => (
     users.map((u) => {
-      const role = Roles.getRolesForUser(u)[0]; // TODO allow multiple roles
+      const roles = [];
+      Roles.getRolesForUser(u).map(r => roles.push({ value: r, label: r }));
       return (
         <User
           key={u._id}
           user={u}
-          role={role}
+          roles={roles}
           changeRole={changeRole}
-          currentUser={u._id === currentUser}
+          currentUser={currentUser}
           removeUser={removeUser}
         />
       );
@@ -28,27 +29,29 @@ const UserList = (props) => {
   return (
     <div>
       <div className='page-header clearfix'>
-        <h4 className='pull-left'>Users</h4>
         <div className='pull-right'>
-          <Button onClick={openModal}>New User</Button>
+          <Button
+            disabled={!Roles.userIsInRole(currentUser, 'admin')}
+            onClick={openModal}
+          >
+            New User
+          </Button>
         </div>
       </div>
       {users.length > 0 ?
-        <div className='table-responsive'>
-          <table className='table table-hover'>
-            <thead>
-              <tr>
-                <th style={({ width: '25%' })} >Email Address</th>
-                <th style={({ width: '20%' })} >First Name</th>
-                <th style={({ width: '20%' })} >Last Name</th>
-                <th style={({ width: '25%' })} >Role</th>
-                <th style={({ width: '10%' })} ></th>
-              </tr>
-            </thead>
-            <tbody>
-              {listUsers()}
-            </tbody>
-          </table>
+        <div className='bstrap-table'>
+          <div className='tblheading'>
+            <div className='tblrow'>
+              <div className='tblcell' style={({ width: '22%' })} >Email Address</div>
+              <div className='tblcell hideSm' style={({ width: '15%' })} >First Name</div>
+              <div className='tblcell hideSm' style={({ width: '15%' })} >Last Name</div>
+              <div className='tblcell' style={({ width: '35%' })} >Role</div>
+              <div className='tblcell' style={({ width: '10%' })} ></div>
+            </div>
+          </div>
+          <div className='tblbody'>
+            {listUsers()}
+          </div>
         </div> :
         <Alert bsStyle='warning'>No users found.</Alert>}
     </div>

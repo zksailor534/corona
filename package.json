@@ -53,6 +53,7 @@
     "react-select": "^1.0.0-rc.2",
     "redux": "^3.5.2",
     "redux-form": "^6.5.0",
+    "redux-persist": "^4.1.0",
     "redux-thunk": "^2.2.0",
     "zxcvbn": "^4.4.1"
   },

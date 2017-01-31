@@ -8,7 +8,7 @@
   "public": {
     "accounts": {
       "signup": false,
-      "invite": false
+      "invite": true
     }
   }
 }

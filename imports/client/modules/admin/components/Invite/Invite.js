@@ -2,20 +2,20 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 
 const Invite = ({ email, token, role, date, removeInvite }) => (
-  <tr id={token} className='user-table'>
-    <td id={`email-${token}`} style={{ verticalAlign: 'middle' }}>
+  <div id={token} className='tblrow'>
+    <div id={`email-${token}`} className='tblcell'>
       {email}
-    </td>
-    <td id={`role-${token}`} style={{ verticalAlign: 'middle' }}>
+    </div>
+    <div id={`role-${token}`} className='tblcell'>
       {role}
-    </td>
-    <td id={`date-${token}`} style={{ verticalAlign: 'middle' }}>
+    </div>
+    <div id={`date-${token}`} className='tblcell'>
       {date}
-    </td>
-    <td style={{ verticalAlign: 'middle' }}>
+    </div>
+    <div className='tblcell'>
       <Button onClick={() => removeInvite({ token })}>Remove</Button>
-    </td>
-  </tr>
+    </div>
+  </div>
 );
 
 Invite.propTypes = {

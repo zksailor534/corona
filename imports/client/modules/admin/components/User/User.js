@@ -29,19 +29,19 @@ const User = ({ user, changeRole, roles, currentUser, removeUser }) => {
   };
 
   return (
-    <tr className='user-table'>
-      <td>
-        {currentUser && <label className='label label-success'>You!</label>}
+    <div className='tblrow'>
+      <div className='tblcell'>
+        {(currentUser === id) && <label className='label label-success'>You!</label>}
         {'  '}
         {email}
-      </td>
-      <td>
+      </div>
+      <div className='tblcell hideSm'>
         {firstName}
-      </td>
-      <td>
+      </div>
+      <div className='tblcell hideSm'>
         {lastName}
-      </td>
-      <td>
+      </div>
+      <div className='tblcell'>
         <Select
           name={`role-${id}`}
           disabled={!Roles.userIsInRole(currentUser, 'admin')}
@@ -50,16 +50,16 @@ const User = ({ user, changeRole, roles, currentUser, removeUser }) => {
           value={roles}
           multi
         />
-      </td>
-      <td>
+      </div>
+      <div className='tblcell'>
         <Button
           onClick={() => removeUser(id)}
           style={hideButton()}
         >
           Remove
         </Button>
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 };
 

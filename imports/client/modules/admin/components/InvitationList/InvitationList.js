@@ -30,20 +30,18 @@ const InvitationList = (props) => {
         </div>
       </div>
       {invitations.length > 0 ?
-        <div className='table-responsive'>
-          <table className='table table-hover'>
-            <thead>
-              <tr>
-                <th style={({ width: '25%' })} >Email Address</th>
-                <th style={({ width: '25%' })} >Role</th>
-                <th style={({ width: '40%' })} >Date</th>
-                <th style={({ width: '10%' })} ></th>
-              </tr>
-            </thead>
-            <tbody>
-              {listInvites()}
-            </tbody>
-          </table>
+        <div className='bstrap-table'>
+          <div className='tblheading'>
+            <div className='tblrow'>
+              <div className='tblcell' style={({ width: '25%' })} >Email Address</div>
+              <div className='tblcell' style={({ width: '25%' })} >Role</div>
+              <div className='tblcell' style={({ width: '40%' })} >Date</div>
+              <div className='tblcell' style={({ width: '10%' })} ></div>
+            </div>
+          </div>
+          <div className='tblbody'>
+            {listInvites()}
+          </div>
         </div> :
         <Alert bsStyle='warning'>No invitations found.</Alert>}
     </div>

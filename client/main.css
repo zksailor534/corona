@@ -1,27 +1,63 @@
-.user-table td {
+.bstrap-table {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+  background-color: transparent;
+  border-collapse: collapse;
+  border-color: grey;
+  box-sizing: border-box;
+}
+
+.bstrap-table .tblheading {
+  display: table-header-group;
   text-align: left;
-  border-bottom: 1px solid #E1E1E1;
-  vertical-align: middle !important;
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
 }
 
-.user-table td:last-child {
-  padding-right: 6px;
+.bstrap-table .tblbody {
+  display: table-row-group;
+  border-color: inherit;
 }
 
-.user-table input {
-  border: none;
-  margin: auto;
-  background: transparent;
-  aria-hidden: true;
+.bstrap-table .tblrow {
+  display: table-row;
+  vertical-align: middle;
+  line-height: 20px;
+  border-color: inherit;
 }
 
-.user-table button {
+.tblbody > .tblrow {
+  border-bottom: 1px solid #ddd;
+}
+
+.tblbody > .tblrow:hover {
+  background-color: #f5f5f5;
+}
+
+.bstrap-table .tblcell {
+  display: table-cell;
+  padding: 8px;
+  height: 36px !important;
+}
+
+@media(max-width: 768px) {
+  .tblcell.hideSm {
+    display: none;
+  }
+}
+
+.bstrap-table .Select {
+  height: 36px;
+}
+
+.bstrap-table button {
   border: none;
   background: transparent;
   color: transparent;
 }
 
-.user-table button:hover {
+.bstrap-table button:hover {
   display: inline-block;
   color: #fff;
   background-color: #c9302c;

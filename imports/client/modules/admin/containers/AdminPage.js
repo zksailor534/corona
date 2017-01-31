@@ -5,7 +5,7 @@ import AdminPage from '../components/AdminPage';
 
 const mapStateToProps = ({ accounts }) => ({
   central: accounts.central,
-  signup: accounts.invite,
+  invite: accounts.invite,
 });
 
 export default composeAll(

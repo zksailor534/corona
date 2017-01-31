@@ -25,7 +25,6 @@ const InvitationList = (props) => {
   return (
     <div>
       <div className='page-header clearfix'>
-        <h4 className='pull-left'>Invitations</h4>
         <div className='pull-right'>
           <Button onClick={openModal}>New Invitation</Button>
         </div>

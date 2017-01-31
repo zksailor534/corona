@@ -1,8 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-import './Invite.css';
-
 const Invite = ({ email, token, role, date, removeInvite }) => (
   <tr id={token} className='user-table'>
     <td id={`email-${token}`} style={{ verticalAlign: 'middle' }}>

@@ -112,7 +112,7 @@ export default {
   // ! ------------------------------------------
   submitSignup({ Meteor, Store, Bert }, props) {
     const { dispatch } = Store;
-    const { email, passwordCreate, firstName, lastName, token = null, role = 'user' } = props;
+    const { email, passwordCreate, firstName, lastName, token = null, roles = ['user'] } = props;
 
     // Change state to signup request
     dispatch(signupRequest());
@@ -126,7 +126,7 @@ export default {
           last: lastName,
         },
       },
-      roles: [role], // TODO change role to roles array
+      roles,
       token,
     };
 

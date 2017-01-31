@@ -76,10 +76,10 @@ describe('Admin methods', () => {
 
     // Change role
     setRoleOnUser.call(
-      { id: userTwo._id, role: newRole },
+      { id: userTwo._id, roles: [newRole] },
     );
     // eslint-disable-next-line no-unused-expressions
-    expect(Roles.userIsInRole(userTwo._id, [newRole])).to.be.tru;
+    expect(Roles.userIsInRole(userTwo._id, [newRole])).to.be.true;
   });
 
   it('does not allow a non-admin to remove a user', () => {

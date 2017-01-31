@@ -19,8 +19,10 @@ const NewUser = (props) => {
   ];
 
   const onSubmit = (data) => {
+    const r = [];
+    data.roles.map(v => r.push(v.value));
     const d = Object.assign({}, data, {
-      role: data.role.value,
+      roles: r,
     });
     signup(d);
     close();
@@ -42,7 +44,13 @@ const NewUser = (props) => {
             </Col>
           </Row>
           <Field name='email' type='text' component={textField} label='Email Address' />
-          <Field name='role' component={selectField} label='User Role' options={roleOptions} />
+          <Field
+            name='roles'
+            component={selectField}
+            label='User Roles'
+            options={roleOptions}
+            multi
+          />
           <Field
             name='passwordCreate'
             type='password'

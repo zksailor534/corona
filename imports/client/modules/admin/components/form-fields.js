@@ -44,7 +44,7 @@ textField.propTypes = {
 };
 
 export const selectField = (props) => {
-  const { input, label, meta, options } = props;
+  const { input, label, meta, options, multi } = props;
   let state = null;
   let message = null;
   if (meta.touched && meta.error) {
@@ -65,6 +65,7 @@ export const selectField = (props) => {
         name={name}
         options={options}
         onBlur={() => (input.onBlur(input.value))}
+        multi={multi}
       />
       {message && <HelpBlock>{message}</HelpBlock> }
     </FormGroup>
@@ -76,6 +77,7 @@ selectField.propTypes = {
   meta: React.PropTypes.object,
   label: React.PropTypes.string,
   options: React.PropTypes.array,
+  multi: React.PropTypes.bool,
 };
 
 export const passwordField = ({ input, name, label, type,

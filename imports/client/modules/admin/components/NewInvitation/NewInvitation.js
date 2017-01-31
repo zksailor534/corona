@@ -22,7 +22,13 @@ const NewInvitation = (props) => {
         </Modal.Header>
         <Modal.Body>
           <Field name='email' type='text' component={textField} label='Email Address' />
-          <Field name='role' component={selectField} label='User Role' options={roleOptions} />
+          <Field
+            name='roles'
+            component={selectField}
+            label='User Roles'
+            options={roleOptions}
+            multi
+          />
         </Modal.Body>
         <Modal.Footer>
           <Button
